@@ -3,7 +3,7 @@ import { LoginFormProps } from "./LoginForm.d";
 import styles from './LoginForm.module.scss';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faSignIn, faUser } from "@fortawesome/free-solid-svg-icons";
-import {onInputChange} from "../../../lib/common/onInputChange";
+import { onInputChange } from "@core/lib/onInputChange";
 
 export const LoginFormComponent = ({appName, userName, setUserName, password, setPassword, login}:LoginFormProps) =>
     <div className={styles.loginForm}>

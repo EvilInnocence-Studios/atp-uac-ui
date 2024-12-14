@@ -1,5 +1,5 @@
 import { createInjector, inject, mergeProps } from "unstateless";
-import { useLoggedInUser } from "../../../lib/common/api/services/uac/login/services";
+import { useLoggedInUser } from "@uac/lib/login/services";
 import { LoggedInComponent } from "./LoggedIn.component";
 import { ILoggedInInputProps, ILoggedInProps, LoggedInProps } from "./LoggedIn.d";
 

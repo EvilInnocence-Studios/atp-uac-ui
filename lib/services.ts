@@ -1,4 +1,4 @@
-import { IMethods } from "../../types";
+import { IMethods } from "@core/lib/types";
 import { loginServices } from "./login/services";
 import { permissionServices } from "./permission/services";
 import { roleServices } from "./role/services";

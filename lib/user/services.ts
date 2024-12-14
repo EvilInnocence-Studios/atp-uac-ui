@@ -1,8 +1,9 @@
-import { IMethods, Query } from "../../../types.d";
-import { getResults } from "../../../util";
-import { NewUser, SafeUser } from "./types";
+import { Query } from "@core-shared/express/types";
+import { IMethods } from "@core/lib/types";
+import { getResults } from "@core/lib/util";
+import { NewUser, SafeUser } from "@uac-shared/user/types";
 
-export const userServices = ({get, post, put, patch, remove}:IMethods) => ({
+export const userServices = ({get, post, /*put, patch, remove*/}:IMethods) => ({
     user: {
         create: (user:NewUser):Promise<SafeUser> => post('user', user)
             .then(getResults<SafeUser>),

@@ -2,7 +2,7 @@ import { createInjector, inject, mergeProps } from "unstateless";
 import {LoginFormComponent} from "./LoginForm.component";
 import {ILoginFormInputProps, LoginFormProps, ILoginFormProps} from "./LoginForm.d";
 import { useState } from "react";
-import { services } from "../../../lib/api";
+import { services } from "@core/lib/api";
 
 const injectLoginFormProps = createInjector(({}:ILoginFormInputProps):ILoginFormProps => {
     const [userName, setUserName] = useState("");
