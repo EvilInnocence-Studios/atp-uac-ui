@@ -5,6 +5,10 @@ import { useEffect, useState } from "react";
 import { IPermission } from "@uac-shared/permissions/types";
 import { services } from "@core/lib/api";
 import { useLoader } from "@core/lib/useLoader";
+import { flash } from "@core/lib/flash";
+import { appendTo, clear } from "@core/lib/util";
+import { set } from "lodash";
+import { all } from "ts-functional";
 
 const injectPermissionManagerProps = createInjector(({}:IPermissionManagerInputProps):IPermissionManagerProps => {
     const [permissions, setPermissions] = useState<IPermission[]>([]);
@@ -34,17 +38,23 @@ const injectPermissionManagerProps = createInjector(({}:IPermissionManagerInputP
     const create = () => {
         loader.start();
         p.create({name, description})
-            .then(newPermission => setPermissions([...permissions, newPermission]))
+            .then(appendTo(permissions))
+            .then(all(
+                refresh,
+                flash.success(`Permission ${name} created`),
+                clear(setName, setDescription),
+            ))
             .finally(loader.stop);
     }
 
     const loader =  useLoader();
-    useEffect(() => {
+    const refresh = () => {
         loader.start();
         services().permission.search({})
             .then(setPermissions)
             .finally(loader.stop);
-    }, []);
+    };
+    useEffect(refresh, []);
     
     return {permissions, isLoading: loader.isLoading, name, description, setName, setDescription, create, update};
 });

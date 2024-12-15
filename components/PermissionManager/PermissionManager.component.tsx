@@ -4,6 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Card, Col, Input, Row, Spin, Table } from "antd";
 import { PermissionManagerProps } from "./PermissionManager.d";
 import styles from './PermissionManager.module.scss';
+import { prop, sort } from "ts-functional";
+import { IPermission } from "@uac-shared/permissions/types";
 
 export const PermissionManagerComponent = ({permissions, isLoading, name, description, setName, setDescription, create, update}:PermissionManagerProps) =>
     <div className={styles.permissionManager}>
@@ -22,7 +24,7 @@ export const PermissionManagerComponent = ({permissions, isLoading, name, descri
             </Col>
             <Col xs={12}>
                 <Spin spinning={isLoading}>
-                    <Table dataSource={permissions} rowKey="id">
+                    <Table dataSource={permissions.sort(sort.by(prop<IPermission, "name">("name")).asc)} rowKey="id">
                         <Table.Column title="Name" dataIndex="name" key="name" />
                         <Table.Column title="Description" dataIndex="description" key="description" />
                         <Table.Column title="Actions" dataIndex="actions" key="actions" />

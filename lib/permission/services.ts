@@ -5,7 +5,7 @@ import { IPermission } from "@uac-shared/permissions/types";
 
 export const permissionServices = ({get, post, /*put, patch,*/ remove}:IMethods) => ({
     permission: {
-        create: (permission:Partial<IPermission>) => post('permission', { name }).then(getResults<IPermission>),
+        create: (permission:Partial<IPermission>) => post('permission', permission).then(getResults<IPermission>),
         search: (query: Query) => get('permission', query).then(getResults<IPermission[]>),
         update: (id: number, data: Partial<IPermission>) => post(`permission/${id}`, data),
         remove: (id: number) => remove(`permission/${id}`),
