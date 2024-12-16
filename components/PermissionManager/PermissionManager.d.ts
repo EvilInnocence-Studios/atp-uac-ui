@@ -1,4 +1,5 @@
 import { IPermission } from "@uac-shared/permissions/types";
+import { ColumnType } from "antd/es/table";
 import { Setter } from "unstateless";
 
 export declare interface IPermissionManagerProps {
@@ -10,6 +11,7 @@ export declare interface IPermissionManagerProps {
     setDescription: Setter<string>;
     create: () => void;
     update: (id: number, field: string) => (value: any) => void;
+    columns: ColumnType<IPermission>[];
 }
 
 // What gets passed into the component from the parent as attributes
