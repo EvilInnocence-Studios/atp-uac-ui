@@ -12,11 +12,11 @@ import { createInjector, inject, mergeProps } from "unstateless";
 import { PermissionManagerComponent } from "./PermissionManager.component";
 import { IPermissionManagerInputProps, IPermissionManagerProps, PermissionManagerProps } from "./PermissionManager.d";
 
-const p = services().permission;
-
 const injectPermissionManagerProps = createInjector(({}:IPermissionManagerInputProps):IPermissionManagerProps => {
     const [permissions, setPermissions] = useState<IPermission[]>([]);
     const loader =  useLoader();
+
+    const p = services().permission;
 
     const update = (id:number, field:string) => (value:any) => {
         const oldPermissions = permissions;

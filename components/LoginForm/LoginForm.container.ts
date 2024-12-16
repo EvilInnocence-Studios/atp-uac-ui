@@ -9,7 +9,7 @@ const injectLoginFormProps = createInjector(({}:ILoginFormInputProps):ILoginForm
     const [password, setPassword] = useState("");
 
     const login = () => {
-        services.login({userName, password});
+        services().login({userName, password});
     }
 
     return {userName, setUserName, password, setPassword, login};
