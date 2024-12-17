@@ -4,40 +4,40 @@ import { services } from "@core/lib/api";
 import { flash } from "@core/lib/flash";
 import { useLoader } from "@core/lib/useLoader";
 import { appendTo, clear } from "@core/lib/util";
-import { IPermission } from "@uac-shared/permissions/types";
+import { IRole } from "@uac-shared/role/types";
 import { ColumnType } from "antd/es/table";
 import { useEffect, useState } from "react";
 import { all } from "ts-functional";
 import { createInjector, inject, mergeProps } from "unstateless";
 import { hasPermission } from "../HasPermission";
-import { PermissionManagerComponent } from "./PermissionManager.component";
-import { IPermissionManagerInputProps, IPermissionManagerProps, PermissionManagerProps } from "./PermissionManager.d";
+import { RoleManagerComponent } from "./RoleManager.component";
+import { IRoleManagerInputProps, IRoleManagerProps, RoleManagerProps } from "./RoleManager.d";
 
-const CanUpdate = hasPermission("permission.update");
-const CanDelete = hasPermission("permission.delete");
+const CanUpdate = hasPermission("role.update");
+const CanDelete = hasPermission("role.delete");
 
-const injectPermissionManagerProps = createInjector(({}:IPermissionManagerInputProps):IPermissionManagerProps => {
-    const [permissions, setPermissions] = useState<IPermission[]>([]);
+const injectRoleManagerProps = createInjector(({}:IRoleManagerInputProps):IRoleManagerProps => {
+    const [roles, setRoles] = useState<IRole[]>([]);
     const loader =  useLoader();
 
-    const permission = services().permission;
+    const role = services().role;
 
     const update = (id:number, field:string) => (value:any) => {
-        const oldPermissions = permissions;
-        setPermissions(permissions.map(p => p.id === id ? {...p, [field]: value} : p));
+        const oldRoles = roles;
+        setRoles(roles.map(r => r.id === id ? {...r, [field]: value} : r));
         loader.start();
-        permission.update(id, {[field]: value})
-            .catch(all(() => setPermissions(oldPermissions), flash.error("Failed to update permission")))
-            .then(flash.success("Permission updated"))
+        role.update(id, {[field]: value})
+            .then(flash.success("Role updated"))
+            .catch(all(() => setRoles(oldRoles), flash.error("Failed to update role")))
             .finally(loader.stop);
     }
 
     const remove = (id:number) => () => {
-        const oldPermissions = permissions;
-        setPermissions(permissions.filter(p => p.id !== id));
+        const oldroles = roles;
+        setRoles(roles.filter(r => r.id !== id));
         loader.start();
-        permission.remove(id)
-            .catch(all(() => setPermissions(oldPermissions), flash.error("Failed to remove permission")))
+        role.remove(id)
+            .catch(all(() => setRoles(oldroles), flash.error("Failed to remove role")))
             .finally(loader.stop);
     }
 
@@ -45,27 +45,27 @@ const injectPermissionManagerProps = createInjector(({}:IPermissionManagerInputP
     const [description, setDescription] = useState('');
     const create = () => {
         loader.start();
-        permission.create({name, description})
-            .then(appendTo(permissions))
+        role.create({name, description})
+            .then(appendTo(roles))
             .then(all(
                 refresh,
-                flash.success(`Permission ${name} created`),
+                flash.success(`Role ${name} created`),
                 clear(setName, setDescription),
             ))
-            .catch(flash.error("Failed to create permission"))
+            .catch(flash.error("Failed to create role"))
             .finally(loader.stop);
     }
 
     const refresh = () => {
         loader.start();
-        permission.search({})
-            .then(setPermissions)
-            .catch(flash.error("Failed to load permissions"))
+        role.search({})
+            .then(setRoles)
+            .catch(flash.error("Failed to load roles"))
             .finally(loader.stop);
     };
     useEffect(refresh, []);
 
-    const columns:ColumnType<IPermission>[] = [{
+    const columns:ColumnType<IRole>[] = [{
         title: "Name",
         key: "name",
         render: (record) => <>
@@ -91,15 +91,15 @@ const injectPermissionManagerProps = createInjector(({}:IPermissionManagerInputP
         title: "Actions",
         key: "actions",
         render: (record) => <CanDelete yes>
-            <DeleteBtn entityType="permission" onClick={remove(record.id)} />
+            <DeleteBtn entityType="role" onClick={remove(record.id)} />
         </CanDelete>,
     }];
     
-    return {permissions, isLoading: loader.isLoading, name, description, setName, setDescription, create, update, columns};
+    return {roles, isLoading: loader.isLoading, name, description, setName, setDescription, create, update, columns};
 });
 
-const connect = inject<IPermissionManagerInputProps, PermissionManagerProps>(mergeProps(
-    injectPermissionManagerProps,
+const connect = inject<IRoleManagerInputProps, RoleManagerProps>(mergeProps(
+    injectRoleManagerProps,
 ));
 
-export const PermissionManager = connect(PermissionManagerComponent);
+export const RoleManager = connect(RoleManagerComponent);

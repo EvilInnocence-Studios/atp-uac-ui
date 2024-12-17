@@ -3,7 +3,7 @@ import { ColumnType } from "antd/es/table";
 import { Setter } from "unstateless";
 
 export declare interface IPermissionManagerProps {
-    permissions: IPermissionp[];
+    permissions: IPermission[];
     isLoading: boolean;
     name: string;
     description: string;

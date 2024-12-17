@@ -1,1 +1,7 @@
 @use "@styles/globals.module.scss";
+
+.newRoleForm {
+    input {
+        margin-bottom: globals.$padding;
+    }
+}

@@ -1,4 +1,15 @@
+import { IRole } from "@uac-shared/role/types";
+
 export declare interface IRoleManagerProps {
+    roles: IRole[];
+    isLoading: boolean;
+    name: string;
+    description: string;
+    setName: Setter<string>;
+    setDescription: Setter<string>;
+    create: () => void;
+    update: (id: number, field: string) => (value: any) => void;
+    columns: ColumnType<IRole>[];
 
 }
 
