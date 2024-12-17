@@ -8,8 +8,8 @@ const injectLoggedInProps = createInjector(({yes, no}:ILoggedInInputProps):ILogg
     const loggedIn = !!loggedInUser && !!loggedInUser.loginToken;
 
     return yes && loggedIn || no && !loggedIn
-    ? {show: true}
-    : {show: false};
+        ? {show: true}
+        : {show: false};
 });
 
 const connect = inject<ILoggedInInputProps, LoggedInProps>(mergeProps(

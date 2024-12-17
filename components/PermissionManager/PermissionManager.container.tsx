@@ -9,8 +9,12 @@ import { ColumnType } from "antd/es/table";
 import { useEffect, useState } from "react";
 import { all } from "ts-functional";
 import { createInjector, inject, mergeProps } from "unstateless";
+import { hasPermission } from "../HasPermission";
 import { PermissionManagerComponent } from "./PermissionManager.component";
 import { IPermissionManagerInputProps, IPermissionManagerProps, PermissionManagerProps } from "./PermissionManager.d";
+
+const CanUpdate = hasPermission("permission.update");
+const CanDelete = hasPermission("permission.delete");
 
 const injectPermissionManagerProps = createInjector(({}:IPermissionManagerInputProps):IPermissionManagerProps => {
     const [permissions, setPermissions] = useState<IPermission[]>([]);
@@ -64,15 +68,31 @@ const injectPermissionManagerProps = createInjector(({}:IPermissionManagerInputP
     const columns:ColumnType<IPermission>[] = [{
         title: "Name",
         key: "name",
-        render: (record) => <Editable value={record.name} onChange={update(record.id, "name")} />,
+        render: (record) => <>
+            <CanUpdate yes>
+                <Editable value={record.name} onChange={update(record.id, "name")} />
+            </CanUpdate>
+            <CanUpdate no>
+                {record.name}
+            </CanUpdate>
+        </>,
     }, {
         title: "Description",
         key: "description",
-        render: (record) => <Editable value={record.description} onChange={update(record.id, "description")} />,
+        render: (record) => <>
+            <CanUpdate yes>
+                <Editable value={record.description} onChange={update(record.id, "description")} />
+            </CanUpdate>
+            <CanUpdate no>
+                {record.description}
+            </CanUpdate>
+        </>,
     }, {
         title: "Actions",
         key: "actions",
-        render: (record) => <DeleteBtn entityType="permission" onClick={remove(record.id)} />,
+        render: (record) => <CanDelete yes>
+            <DeleteBtn entityType="permission" onClick={remove(record.id)} />
+        </CanDelete>,
     }];
     
     return {permissions, isLoading: loader.isLoading, name, description, setName, setDescription, create, update, columns};
