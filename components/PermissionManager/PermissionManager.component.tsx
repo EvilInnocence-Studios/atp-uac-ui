@@ -6,6 +6,7 @@ import { PermissionManagerProps } from "./PermissionManager.d";
 import styles from './PermissionManager.module.scss';
 import { prop, sort } from "ts-functional";
 import { IPermission } from "@uac-shared/permissions/types";
+import { PermissionRoleManager } from "../PermissionRoleManager";
 
 export const PermissionManagerComponent = ({permissions, isLoading, name, description, setName, setDescription, create, columns}:PermissionManagerProps) =>
     <div className={styles.permissionManager}>
@@ -29,6 +30,7 @@ export const PermissionManagerComponent = ({permissions, isLoading, name, descri
                         rowKey="id"
                         columns={columns}
                         size="small"
+                        expandable={{expandedRowRender: p => <PermissionRoleManager permission={p} />}}
                     />
                 </Spin>
             </Col>
