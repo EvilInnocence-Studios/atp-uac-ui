@@ -1,1 +1,26 @@
 @use "@styles/globals.module.scss";
+
+.rolePermissionManager {
+    .buttonGroup {
+        display: inline-block;
+        margin: globals.$padding-sm;
+        > span {
+            display: inline-block;
+            border-color: globals.$brand-border;
+            border-radius: 0;
+            border-left: none;
+            border-right: none;
+            margin-left: 0;
+            margin-right: 0;
+            &:first-child{
+                border-left: solid 1px globals.$brand-border;
+                border-right: solid 1px globals.$brand-border;
+                border-radius: 3px 0 0 3px;
+            }
+            &:last-child{
+                border-right: solid 1px globals.$brand-border;
+                border-radius: 0 3px 3px 0;
+            }
+        }
+    }
+}
