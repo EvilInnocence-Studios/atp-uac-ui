@@ -1,1 +1,7 @@
 @use "@styles/globals.module.scss";
+
+.newUserForm {
+    input {
+        margin-bottom: globals.$padding;
+    }
+}
