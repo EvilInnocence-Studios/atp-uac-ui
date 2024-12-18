@@ -27,8 +27,8 @@ const injectUserManagerProps = createInjector(({}:IUserManagerInputProps):IUserM
         setUsers(users.map(u => u.id === id ? {...u, [field]: value} : u));
         loader.start();
         user.update(id, {[field]: value})
-            .catch(all(() => setUsers(oldUsers), flash.error("Failed to update user")))
             .then(flash.success("User updated"))
+            .catch(all(() => setUsers(oldUsers), flash.error("Failed to update user")))
             .finally(loader.stop);
     }
 

@@ -27,8 +27,8 @@ const injectPermissionManagerProps = createInjector(({}:IPermissionManagerInputP
         setPermissions(permissions.map(p => p.id === id ? {...p, [field]: value} : p));
         loader.start();
         permission.update(id, {[field]: value})
-            .catch(all(() => setPermissions(oldPermissions), flash.error("Failed to update permission")))
             .then(flash.success("Permission updated"))
+            .catch(all(() => setPermissions(oldPermissions), flash.error("Failed to update permission")))
             .finally(loader.stop);
     }
 
