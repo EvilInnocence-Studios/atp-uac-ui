@@ -11,8 +11,8 @@ export const LoginFormComponent = ({appName, userName, setUserName, password, se
             {appName} Login
         </div>
         <div className={styles.form}>
-            <Input addonBefore={<FontAwesomeIcon icon={faUser} />} value = {userName} placeholder="Username" onChange={onInputChange(setUserName)}/>
-            <Input.Password addonBefore={<FontAwesomeIcon icon={faLock} />} value={password} placeholder="Password" onChange={onInputChange(setPassword)}/>
+            <Input id={`userName-${Math.random()}`} addonBefore={<FontAwesomeIcon icon={faUser} />} value = {userName} placeholder="Username" onChange={onInputChange(setUserName)}/>
+            <Input.Password id={`password-${Math.random()}`} addonBefore={<FontAwesomeIcon icon={faLock} />} value={password} placeholder="Password" onChange={onInputChange(setPassword)}/>
         </div>
         <div className={styles.footer}>
             <Button type="primary" onClick={login}>
