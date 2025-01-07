@@ -16,20 +16,45 @@ $loginformWidth: 378px;
         border-top-right-radius: globals.$border-radius-lg;
         padding: globals.$padding-sm;
         font-weight: bold;
+        position: relative;
+        img {
+            width: 64px;
+            position: absolute;
+            top: 16px;
+            left:16px;
+        }
+        svg {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            cursor: pointer;
+        }
     }
     .form {
-        padding: globals.$padding-sm globals.$padding;
+        padding: globals.$padding-sm globals.$padding 0 globals.$padding;
         background-color: globals.$brand-bg;
         > :global(.ant-input-group-wrapper) {
-            margin-bottom: globals.$padding;
+            display: block;
+            margin: globals.$padding-sm 0 0 0;
+        }
+        .links {
+            text-align: center;
+            > div {
+                margin: 0;
+                padding: 0;
+                button {
+                    width: 100%;
+                    margin: 0;
+                }
+            }
         }
     }
     .footer {
-        text-align: right;
         background-color: globals.$brand-bg-light;
         border-bottom-left-radius: globals.$border-radius-lg;
         border-bottom-right-radius: globals.$border-radius-lg;
         padding: globals.$padding-sm;
         font-weight: bold;
+        text-align: center;
     }
 }

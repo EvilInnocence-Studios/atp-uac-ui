@@ -25,5 +25,9 @@ export const loginServices = ({post}:IMethods) => ({
     logout: () => {
         notification.success({message: "You have been logged out"});
         useLoggedInUser.setValue(emptyLoggedInUser);
-    }
+    },
+    forgotPassword: (userName: string) => post('user/forgotPassword', {userName})
+        .then(() => notification.success({message: 'Password Reset Email Sent'})),
+    forgotUsername: (email: string) => post('user/forgotUsername', {email})
+        .then(() => notification.success({message: 'Username Reminder Email Sent'})),
 });

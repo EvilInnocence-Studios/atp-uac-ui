@@ -1,8 +1,8 @@
 import { services } from "@core/lib/api";
-import { useModal } from "@core/lib/useModal";
 import { faSignOut, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useLoggedInUser } from "@uac/lib/login/services";
+import { useLoginForm } from "@uac/lib/useLoginForm";
 import { useNavigate } from 'react-router';
 import { createInjector, inject, mergeProps } from "unstateless";
 import { AccountMenuComponent } from "./AccountMenu.component";
@@ -10,7 +10,7 @@ import { AccountMenuProps, IAccountMenuInputProps, IAccountMenuProps } from "./A
 
 const injectAccountMenuProps = createInjector(({}:IAccountMenuInputProps):IAccountMenuProps => {
     const [user] = useLoggedInUser();
-    const modal = useModal();
+    const modal = useLoginForm();
     const navigate = useNavigate();
     
     const menu = [{
