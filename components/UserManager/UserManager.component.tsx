@@ -30,7 +30,7 @@ export const UserManagerComponent = ({users, isLoading, userName, email, passwor
                     </Card>
                 </CanCreate>
             </Col>
-            <Col xs={12}>
+            <Col xs={18}>
                 <Spin spinning={isLoading}>
                     <CanView yes>
                         <Table

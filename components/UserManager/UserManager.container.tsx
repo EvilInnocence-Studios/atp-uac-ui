@@ -12,6 +12,9 @@ import { ColumnType } from "antd/es/table";
 import { hasPermission } from "../HasPermission";
 import { Editable } from "@core/components/Editable";
 import { DeleteBtn } from "@core/components/DeleteBtn";
+import { Input } from "antd";
+import { useTableFilters } from "@core/lib/useTableFilters";
+import { filter } from "lodash";
 
 const CanUpdate = hasPermission("user.update");
 const CanDelete = hasPermission("user.delete");
@@ -66,9 +69,11 @@ const injectUserManagerProps = createInjector(({}:IUserManagerInputProps):IUserM
     };
     useEffect(refresh, []);
 
+    const filters = useTableFilters(users);
     const columns:ColumnType<IUser>[] = [{
-        title: "UserName",
+        title: filters.filter("User Name", "userName"),
         key: "userName",
+
         render: (record) => <>
             <CanUpdate yes>
                 <Editable value={record.userName} onChange={update(record.id, "userName")} />
@@ -78,7 +83,7 @@ const injectUserManagerProps = createInjector(({}:IUserManagerInputProps):IUserM
             </CanUpdate>
         </>,
     }, {
-        title: "Email",
+        title: filters.filter("Email", "email"),
         key: "email",
         render: (record) => <>
             <CanUpdate yes>
@@ -89,25 +94,36 @@ const injectUserManagerProps = createInjector(({}:IUserManagerInputProps):IUserM
             </CanUpdate>
         </>,
     }, {
-        title: "Password",
-        key: "password",
+        title: filters.filter("First Name", "firstName"),
+        key: "firstName",
         render: (record) => <>
             <CanUpdate yes>
-                Password Updater goes here
+                <Editable value={record.firstName} onChange={update(record.id, "firstName")} />
             </CanUpdate>
             <CanUpdate no>
-                {record.description}
+                {record.firstName}
             </CanUpdate>
         </>,
     },{
-        title: "Actions",
+        title: filters.filter("Last Name", "lastName"),
+        key: "lastName",
+        render: (record) => <>
+            <CanUpdate yes>
+                <Editable value={record.lastName} onChange={update(record.id, "lastName")} />
+            </CanUpdate>
+            <CanUpdate no>
+                {record.lastName}
+            </CanUpdate>
+        </>,
+    },{
+        title: filters.Clear,
         key: "actions",
         render: (record) => <CanDelete yes>
             <DeleteBtn entityType="permission" onClick={remove(record.id)} />
         </CanDelete>,
     }];
     
-    return {users, isLoading: loader.isLoading, userName, email, password, setUserName, setEmail, setPassword, create, update, columns};
+    return {users: filters.items, isLoading: loader.isLoading, userName, email, password, setUserName, setEmail, setPassword, create, update, columns};
 
 });
 
