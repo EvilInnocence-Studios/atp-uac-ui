@@ -5,6 +5,9 @@ import { useState } from "react";
 import { services } from "@core/lib/api";
 import { useModal } from "@core/lib/useModal";
 import { useLoginForm } from "@uac/lib/useLoginForm";
+import dayjs from "dayjs";
+import { all } from "ts-functional";
+import { flash } from "@core/lib/flash";
 
 const injectLoginFormProps = createInjector(({}:ILoginFormInputProps):ILoginFormProps => {
     const [userName, setUserName] = useState("");
@@ -27,7 +30,23 @@ const injectLoginFormProps = createInjector(({}:ILoginFormInputProps):ILoginForm
         forgotUserNameForm.close();
     }
 
-    return {userName, setUserName, password, setPassword, email, setEmail, login, forgotPassword, forgotUsername, forgotUserNameForm, modal, createAccountForm};
+    const createAccount = () => {
+        services().user.create({
+            userName, password, email,
+            prefix: "", firstName: "", lastName: "",
+            mustUpdatePassword: false,
+            suffix: "",
+            createdAt: dayjs().toISOString(),
+        }).then(all(createAccountForm.close, modal.close, flash.success("Account created"), login));
+    }
+
+    return {
+        userName, setUserName,
+        password, setPassword,
+        email, setEmail,
+        login, forgotPassword, forgotUsername, forgotUserNameForm, modal,
+        createAccountForm, createAccount
+    };
 });
 
 const connect = inject<ILoginFormInputProps, LoginFormProps>(mergeProps(

@@ -12,6 +12,7 @@ export declare interface ILoginFormProps {
     forgotUsername: () => void;
     forgotUserNameForm: IModal;
     createAccountForm: IModal;
+    createAccount: () => void;
     modal:IModal;
 }
 

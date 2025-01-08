@@ -11,7 +11,7 @@ export const LoginFormComponent = ({
     password, setPassword,
     email, setEmail,
     login, forgotPassword, forgotUsername, forgotUserNameForm, createAccountForm,
-    modal,
+    modal, createAccount,
 }:LoginFormProps) =>
     <div className={styles.loginForm}>
         <div className={styles.header}>
@@ -80,7 +80,11 @@ export const LoginFormComponent = ({
         <div className={styles.footer}>
             <Row>
                 {!forgotUserNameForm.visible && <Col xs={createAccountForm.visible ? 24 : 12}>
-                    <Button type={createAccountForm.visible ? "primary" : "default"} className={styles.register} onClick={createAccountForm.open}>
+                    <Button
+                        type={createAccountForm.visible ? "primary" : "default"}
+                        className={styles.register}
+                        onClick={createAccountForm.visible ? createAccount : createAccountForm.open}
+                    >
                         <FontAwesomeIcon icon={faUserPlus} /> Create Account
                     </Button>
                 </Col>}
