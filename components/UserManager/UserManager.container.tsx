@@ -1,20 +1,19 @@
-import { createInjector, inject, mergeProps } from "unstateless";
-import {UserManagerComponent} from "./UserManager.component";
-import {IUserManagerInputProps, UserManagerProps, IUserManagerProps} from "./UserManager.d";
-import { useEffect, useState } from "react";
-import { IUser, SafeUser } from "@uac-shared/user/types";
-import { useLoader } from "@core/lib/useLoader";
-import { services } from "@core/lib/api";
-import { all } from "ts-functional";
-import { flash } from "@core/lib/flash";
-import { appendTo, clear } from "@core/lib/util";
-import { ColumnType } from "antd/es/table";
-import { hasPermission } from "../HasPermission";
-import { Editable } from "@core/components/Editable";
 import { DeleteBtn } from "@core/components/DeleteBtn";
-import { Input } from "antd";
+import { Editable } from "@core/components/Editable";
+import { services } from "@core/lib/api";
+import { flash } from "@core/lib/flash";
+import { useLoader } from "@core/lib/useLoader";
 import { useTableFilters } from "@core/lib/useTableFilters";
-import { filter } from "lodash";
+import { appendTo, clear } from "@core/lib/util";
+import { IUser, SafeUser } from "@uac-shared/user/types";
+import { ColumnType } from "antd/es/table";
+import dayjs from "dayjs";
+import { useEffect, useState } from "react";
+import { all } from "ts-functional";
+import { createInjector, inject, mergeProps } from "unstateless";
+import { hasPermission } from "../HasPermission";
+import { UserManagerComponent } from "./UserManager.component";
+import { IUserManagerInputProps, IUserManagerProps, UserManagerProps } from "./UserManager.d";
 
 const CanUpdate = hasPermission("user.update");
 const CanDelete = hasPermission("user.delete");
@@ -49,7 +48,7 @@ const injectUserManagerProps = createInjector(({}:IUserManagerInputProps):IUserM
     const [password, setPassword] = useState('');
     const create = () => {
         loader.start();
-        user.create({userName, email, password: 'password', mustUpdatePassword: true})
+        user.create({userName, email, password: 'password', mustUpdatePassword: true, prefix: "", firstName: "", lastName: "", suffix: "", createdAt: dayjs().toISOString()})
             .then(appendTo(users))
             .then(all(
                 refresh,
