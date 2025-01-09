@@ -10,6 +10,6 @@ export const AccountMenuComponent = ({user, modal, menu, onMenuClick}:AccountMen
     <div className={styles.loginFormContainer} style={{display: modal.visible && !isLoggedIn(user) ? "block" : "none"}}>
         <LoginForm />
     </div>
-    {!isLoggedIn(user) && <FontAwesomeIcon icon={faSignIn} onClick={modal.open}/>}
+    {!isLoggedIn(user) && <><FontAwesomeIcon icon={faSignIn} onClick={modal.open}/> Login</>}
     {isLoggedIn(user) && <Menu className={styles.accountMenu} items={menu} onClick={onMenuClick}/>}
 </>;

@@ -1,10 +1,20 @@
-import { notification } from "antd";
-import { useLocalStorage } from "unstateless";
 import { IMethods } from "@core/lib/types";
 import { getResults } from "@core/lib/util";
 import { ILoginRequest, ILoginResponse } from "@uac-shared/login/types";
+import { notification } from "antd";
+import { useLocalStorage } from "unstateless";
 
-const emptyUser = {userName: '', id: 0, email: "", mustUpdatePassword: false};
+const emptyUser = {
+    userName: '',
+    id: 0,
+    email: "",
+    mustUpdatePassword: false,
+    prefix: "",
+    firstName: "",
+    lastName: "",
+    suffix: "",
+    createdAt: "",
+};
 const emptyLoggedInUser = {user: emptyUser, loginToken: '', permissions: []};
 
 export const useLoggedInUser = useLocalStorage.object<ILoginResponse>('loggedInUser', emptyLoggedInUser);
