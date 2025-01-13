@@ -10,6 +10,7 @@ export const permissionServices = ({get, post, /*put,*/ patch, remove}:IMethods)
         search: (query: Query) => get('permission', query).then(getResults<IPermission[]>),
         update: (id: number, data: Partial<IPermission>) => patch(`permission/${id}`, data),
         remove: (id: number) => remove(`permission/${id}`),
+        default: ():Promise<IPermission[]> => get('permission/default').then(getResults<IPermission[]>),
         role: {
             search: (permissionId: number) => get(`permission/${permissionId}/role`).then(getResults<IRole[]>),
             add: (permissionId: number, roleId: number) => post(`permission/${permissionId}/role`, {roleId}),
