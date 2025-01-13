@@ -5,8 +5,17 @@ import { switchOn } from "ts-functional";
 import { RolePermissionManagerProps } from "./RolePermissionManager.d";
 import styles from './RolePermissionManager.module.scss';
 import { hasPermission } from "../HasPermission";
+import { IPermission } from "@uac-shared/permissions/types";
 
 const CanEdit = hasPermission("role.update");
+
+// Sort grouped permissions in this order: create, view, update, delete, and then all others
+const permissionSort = (a:IPermission, b:IPermission) => {
+    const order = ["delete", "update", "view", "create"];
+    const aIndex = order.indexOf(a.name.split(".")[1]);
+    const bIndex = order.indexOf(b.name.split(".")[1]);
+    return bIndex - aIndex;
+}
 
 export const RolePermissionManagerComponent = ({role, permissions, groupedPermissions, add, addAll, remove, removeAll, isLoading}:RolePermissionManagerProps) =>
     <Spin spinning={isLoading}>
@@ -28,7 +37,7 @@ export const RolePermissionManagerComponent = ({role, permissions, groupedPermis
                     >
                         <FontAwesomeIcon icon={faKey} /> {group}
                     </Tag>
-                    {groupedPermissions[group].map(p => <Tag
+                    {groupedPermissions[group].sort(permissionSort).map(p => <Tag
                         onClick={permissions.find(pp => pp.id === p.id) ? remove(p) : add(p)}
                         color={permissions.find(pp => pp.id === p.id) ? "green" : "red"}
                     >
