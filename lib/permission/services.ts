@@ -3,6 +3,7 @@ import { IMethods } from "@core/lib/types";
 import { getResults } from "@core/lib/util";
 import { IPermission, NewPermission } from "@uac-shared/permissions/types";
 import { IRole } from "@uac-shared/role/types";
+import { memoizePromise } from "ts-functional";
 
 export const permissionServices = ({get, post, /*put,*/ patch, remove}:IMethods) => ({
     permission: {
@@ -10,7 +11,7 @@ export const permissionServices = ({get, post, /*put,*/ patch, remove}:IMethods)
         search: (query: Query) => get('permission', query).then(getResults<IPermission[]>),
         update: (id: number, data: Partial<IPermission>) => patch(`permission/${id}`, data),
         remove: (id: number) => remove(`permission/${id}`),
-        default: ():Promise<IPermission[]> => get('permission/default').then(getResults<IPermission[]>),
+        default: memoizePromise(():Promise<IPermission[]> => get('permission/default').then(getResults<IPermission[]>)),
         role: {
             search: (permissionId: number) => get(`permission/${permissionId}/role`).then(getResults<IRole[]>),
             add: (permissionId: number, roleId: number) => post(`permission/${permissionId}/role`, {roleId}),

@@ -9,11 +9,12 @@ export const userServices = ({get, post, /*put,*/ patch, remove}:IMethods) => ({
             .then(getResults<SafeUser>),
         search: (query: Query):Promise<SafeUser[]> => get('user', query)
             .then(getResults<SafeUser[]>),
+        get: (id:number):Promise<SafeUser> => get(`user/${id}`),
         update: (id:number, user:Partial<UserUpdate>):Promise<SafeUser> => patch(`user/${id}`, user),
         remove: (id:number):Promise<void> => remove(`user/${id}`, {}),
         role: {
             add: (userId:number, roleId:number):Promise<void> => post(`user/${userId}/role`, {roleId}),
             remove: (userId:number, roleId:number):Promise<void> => remove(`user/${userId}/role/${roleId}`),
-        }
+        },
     }
 });

@@ -2,9 +2,11 @@ import { services } from "@core/lib/api";
 import { IMethods } from "@core/lib/types";
 import { getResults } from "@core/lib/util";
 import { ILoginRequest, ILoginResponse } from "@uac-shared/login/types";
+import { IPermission } from "@uac-shared/permissions/types";
 import { notification } from "antd";
 import { useEffect } from "react";
-import { useLocalStorage } from "unstateless";
+import { memoizePromise } from "ts-functional";
+import { Setter, useLocalStorage, useSharedState } from "unstateless";
 
 const emptyUser = {
     userName: '',
@@ -24,16 +26,22 @@ export const isLoggedIn = (user:ILoginResponse) => !!user.loginToken;
 export const getLoginToken = () => useLoggedInUserRaw.getValue().loginToken;
 export const getCurrentUser = () => useLoggedInUserRaw.getValue().user;
 
-export const useLoggedInUser = () => {
+const loadDefaultPermissions = memoizePromise(() => services().permission.default());
+
+export const useLoggedInUser = ():[ILoginResponse, Setter<ILoginResponse>] => {
     const [user, setUser] = useLoggedInUserRaw();
+    const [defaultPermissions, setDefaultPermissions] = useSharedState<IPermission[]>('defaultPermissions', [])();
+
+    useEffect(() => {
+        if(defaultPermissions.length === 0) {
+            loadDefaultPermissions().then(setDefaultPermissions);
+        }
+    }, []);
 
     // If the user is not logged in, fetch the default permissions from the api
     useEffect(() => {
         if (!isLoggedIn(user)) {
-            // Fetch the default permissions
-            services().permission.default().then((permissions) => {
-                setUser({...user, permissions});
-            });
+            setUser({...user, permissions: defaultPermissions});
         }
     }, [isLoggedIn(user)]);
 
