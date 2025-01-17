@@ -30,7 +30,7 @@ const injectAccountMenuProps = createInjector(({}:IAccountMenuInputProps):IAccou
 
     const onMenuClick = ({key}:{key:string}) => {
         if(key === "my-account") {
-            navigate('/my-account');
+            navigate('/my-account/profile');
         }
         if(key === "logout" && !!user.loginToken) {
             services().logout();
