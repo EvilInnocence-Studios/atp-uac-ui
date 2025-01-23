@@ -47,7 +47,7 @@ const injectPermissionRoleManagerProps = createInjector(({permission}:IPermissio
 
     useEffect(() => {
         p.role.search(permission.id).then(setRoles);
-    }, []);
+    }, [permission.id]);
     
     return {roles, allRoles, add, remove, isLoading: loader.isLoading};
 });
