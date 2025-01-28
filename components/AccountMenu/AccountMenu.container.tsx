@@ -35,6 +35,7 @@ const injectAccountMenuProps = createInjector(({}:IAccountMenuInputProps):IAccou
         if(key === "logout" && !!user.loginToken) {
             services().logout();
             modal.close();
+            navigate("/");
         }
     }
 

@@ -1,1 +1,18 @@
 @use "@styles/globals.module.scss";
+
+.profileEditor {
+    margin-right: globals.$padding;
+    max-width: 768px;
+    > div > div {
+        margin-bottom: globals.$padding;
+    }
+
+    .nameEdit {
+        input {
+            width: 25%;
+        }
+    };
+    button {
+        width: 100%;
+    }
+}
