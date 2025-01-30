@@ -1,9 +1,7 @@
 import { Setter } from "unstateless";
 
 export declare interface IPasswordResetProps {
-    oldPassword: string;
     newPassword: string;
-    setOldPassword: Setter<string>;
     setNewPassword: Setter<string>;
     update: () => void;
 }
