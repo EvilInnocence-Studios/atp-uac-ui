@@ -22,7 +22,7 @@ const injectPermissionManagerProps = createInjector(({}:IPermissionManagerInputP
 
     const permission = services().permission;
 
-    const update = (id:number, field:string) => (value:any) => {
+    const update = (id:string, field:string) => (value:any) => {
         const oldPermissions = permissions;
         setPermissions(permissions.map(p => p.id === id ? {...p, [field]: value} : p));
         loader.start();
@@ -32,7 +32,7 @@ const injectPermissionManagerProps = createInjector(({}:IPermissionManagerInputP
             .finally(loader.stop);
     }
 
-    const remove = (id:number) => () => {
+    const remove = (id:string) => () => {
         const oldPermissions = permissions;
         setPermissions(permissions.filter(p => p.id !== id));
         loader.start();

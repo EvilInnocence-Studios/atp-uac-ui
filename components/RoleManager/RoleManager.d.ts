@@ -8,7 +8,7 @@ export declare interface IRoleManagerProps {
     setName: Setter<string>;
     setDescription: Setter<string>;
     create: () => void;
-    update: (id: number, field: string) => (value: any) => void;
+    update: (id:string, field: string) => (value: any) => void;
     columns: ColumnType<IRole>[];
 
 }

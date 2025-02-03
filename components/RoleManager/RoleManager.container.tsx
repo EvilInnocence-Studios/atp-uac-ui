@@ -22,7 +22,7 @@ const injectRoleManagerProps = createInjector(({}:IRoleManagerInputProps):IRoleM
 
     const role = services().role;
 
-    const update = (id:number, field:string) => (value:any) => {
+    const update = (id:string, field:string) => (value:any) => {
         const oldRoles = roles;
         setRoles(roles.map(r => r.id === id ? {...r, [field]: value} : r));
         loader.start();
@@ -32,7 +32,7 @@ const injectRoleManagerProps = createInjector(({}:IRoleManagerInputProps):IRoleM
             .finally(loader.stop);
     }
 
-    const remove = (id:number) => () => {
+    const remove = (id:string) => () => {
         const oldroles = roles;
         setRoles(roles.filter(r => r.id !== id));
         loader.start();

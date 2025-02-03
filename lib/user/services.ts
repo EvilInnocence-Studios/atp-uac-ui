@@ -10,16 +10,16 @@ export const userServices = ({get, post, /*put,*/ patch, remove}:IMethods) => ({
             .then(getResults<SafeUser>),
         search: (query: Query):Promise<SafeUser[]> => get('user', query)
             .then(getResults<SafeUser[]>),
-        get: (id:number):Promise<SafeUser> => get(`user/${id}`),
-        update: (id:number, user:Partial<UserUpdate>):Promise<SafeUser> => patch(`user/${id}`, user),
+        get: (id:string):Promise<SafeUser> => get(`user/${id}`),
+        update: (id:string, user:Partial<UserUpdate>):Promise<SafeUser> => patch(`user/${id}`, user),
         resetPassword: (token:string, newPassword:string):Promise<void> => post('user/resetPassword', {token, newPassword}),
         getPasswordResetToken: (userName:string):Promise<string> => get(`user/passwordResetToken`, {userName}).then(getResults<string>),
-        remove: (id:number):Promise<void> => remove(`user/${id}`, {}),
+        remove: (id:string):Promise<void> => remove(`user/${id}`, {}),
         role: {
-            search: (userId:number):Promise<IRole[]> => get(`user/${userId}/role`)
+            search: (userId:string):Promise<IRole[]> => get(`user/${userId}/role`)
                 .then(getResults<IRole[]>),
-            add: (userId:number, roleId:number):Promise<void> => post(`user/${userId}/role`, {roleId}),
-            remove: (userId:number, roleId:number):Promise<void> => remove(`user/${userId}/role/${roleId}`),
+            add: (userId:string, roleId:string):Promise<void> => post(`user/${userId}/role`, {roleId}),
+            remove: (userId:string, roleId:string):Promise<void> => remove(`user/${userId}/role/${roleId}`),
         },
     }
 });

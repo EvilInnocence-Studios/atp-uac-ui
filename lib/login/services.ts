@@ -10,7 +10,7 @@ import { Setter, useLocalStorage, useSharedState } from "unstateless";
 
 const emptyUser = {
     userName: '',
-    id: 0,
+    id: "0",
     email: "",
     mustUpdatePassword: false,
     prefix: "",

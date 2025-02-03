@@ -24,7 +24,7 @@ const injectUserManagerProps = createInjector(({}:IUserManagerInputProps):IUserM
 
     const user = services().user;
 
-    const update = (id:number, field:string) => (value:any) => {
+    const update = (id:string, field:string) => (value:any) => {
         const oldUsers = users;
         setUsers(users.map(u => u.id === id ? {...u, [field]: value} : u));
         loader.start();
@@ -34,7 +34,7 @@ const injectUserManagerProps = createInjector(({}:IUserManagerInputProps):IUserM
             .finally(loader.stop);
     }
 
-    const remove = (id:number) => () => {
+    const remove = (id:string) => () => {
         const oldUsers = users;
         setUsers(users.filter(u => u.id !== id));
         loader.start();

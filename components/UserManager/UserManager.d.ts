@@ -10,7 +10,7 @@ export declare interface IUserManagerProps {
     setEmail: Setter<string>;
     setPassword: Setter<string>;
     create: () => void;
-    update: (id: number, field: string) => (value: any) => void;
+    update: (id:string, field: string) => (value: any) => void;
     columns: ColumnType<SafeUser>[];
 
 }
