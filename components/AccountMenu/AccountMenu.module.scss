@@ -11,6 +11,12 @@
     height: 100vh;
 }
 
+.userName {
+    @media (max-width: 1160px) {
+        display: none;
+    }
+}
+
 .accountMenu {
     margin: globals.$padding-sm !important;
 }

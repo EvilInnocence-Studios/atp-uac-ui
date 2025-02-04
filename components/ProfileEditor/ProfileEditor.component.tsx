@@ -19,9 +19,9 @@ export const ProfileEditorComponent = ({user, isLoading, update, title, resetTok
         <div className={styles.profileEditor}>
             <h1>{title || "Profile Editor"}</h1>
             {user && <Row gutter={16}>
-                <Col xs={8}><Label label="Username"><Editable value={user.userName} onChange={update('userName')} /></Label></Col>
-                <Col xs={8}><Label label="Email"><Editable value={user.email} onChange={update('email')} /></Label></Col>
-                <Col xs={8}><Button onClick={openModal}><FontAwesomeIcon icon={faRefresh} /> Update Password</Button></Col>
+                <Col xs={24} md={8}><Label label="Username"><Editable value={user.userName} onChange={update('userName')} /></Label></Col>
+                <Col xs={24} md={8}><Label label="Email"><Editable value={user.email} onChange={update('email')} /></Label></Col>
+                <Col xs={24} md={8}><Button onClick={openModal}><FontAwesomeIcon icon={faRefresh} /> Update Password</Button></Col>
                 <Col xs={24} className={styles.nameEdit}>
                     <Label label="Name">
                         <Editable placeholder="Prefix" value={user.prefix} onChange={update("prefix")} />

@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router';
 import { createInjector, inject, mergeProps } from "unstateless";
 import { AccountMenuComponent } from "./AccountMenu.component";
 import { AccountMenuProps, IAccountMenuInputProps, IAccountMenuProps } from "./AccountMenu.d";
+import styles from "./AccountMenu.module.scss";
 
 const injectAccountMenuProps = createInjector(({}:IAccountMenuInputProps):IAccountMenuProps => {
     const [user] = useLoggedInUser();
@@ -14,7 +15,7 @@ const injectAccountMenuProps = createInjector(({}:IAccountMenuInputProps):IAccou
     const navigate = useNavigate();
     
     const menu = [{
-        label: user.user.userName,
+        label: <span className={styles.userName}>{user.user.userName}</span>,
         key: "account",
         icon: <FontAwesomeIcon icon={faUser} />,
         children: [{
