@@ -12,6 +12,7 @@ import { createInjector, inject, mergeProps } from "unstateless";
 import { hasPermission } from "../HasPermission";
 import { RoleManagerComponent } from "./RoleManager.component";
 import { IRoleManagerInputProps, IRoleManagerProps, RoleManagerProps } from "./RoleManager.d";
+import { useTableFilters } from "@core/lib/useTableFilters";
 
 const CanUpdate = hasPermission("role.update");
 const CanDelete = hasPermission("role.delete");
@@ -65,8 +66,9 @@ const injectRoleManagerProps = createInjector(({}:IRoleManagerInputProps):IRoleM
     };
     useEffect(refresh, []);
 
+    const filters = useTableFilters<IRole>(roles);
     const columns:ColumnType<IRole>[] = [{
-        title: "Name",
+        title: filters.filter("Name", "name"),
         key: "name",
         render: (record) => <>
             <CanUpdate yes>
@@ -77,7 +79,7 @@ const injectRoleManagerProps = createInjector(({}:IRoleManagerInputProps):IRoleM
             </CanUpdate>
         </>,
     }, {
-        title: "Description",
+        title: filters.filter("Description", "description"),
         key: "description",
         render: (record) => <>
             <CanUpdate yes>
@@ -95,7 +97,7 @@ const injectRoleManagerProps = createInjector(({}:IRoleManagerInputProps):IRoleM
         </CanDelete>,
     }];
     
-    return {roles, isLoading: loader.isLoading, name, description, setName, setDescription, create, update, columns};
+    return {roles: filters.items, isLoading: loader.isLoading, name, description, setName, setDescription, create, update, columns};
 });
 
 const connect = inject<IRoleManagerInputProps, RoleManagerProps>(mergeProps(

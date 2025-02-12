@@ -12,6 +12,7 @@ import { createInjector, inject, mergeProps } from "unstateless";
 import { hasPermission } from "../HasPermission";
 import { PermissionManagerComponent } from "./PermissionManager.component";
 import { IPermissionManagerInputProps, IPermissionManagerProps, PermissionManagerProps } from "./PermissionManager.d";
+import { useTableFilters } from "@core/lib/useTableFilters";
 
 const CanUpdate = hasPermission("permission.update");
 const CanDelete = hasPermission("permission.delete");
@@ -65,8 +66,9 @@ const injectPermissionManagerProps = createInjector(({}:IPermissionManagerInputP
     };
     useEffect(refresh, []);
 
+    const filters = useTableFilters<IPermission>(permissions);
     const columns:ColumnType<IPermission>[] = [{
-        title: "Name",
+        title: filters.filter("Name", "name"),
         key: "name",
         render: (record) => <>
             <CanUpdate yes>
@@ -77,7 +79,7 @@ const injectPermissionManagerProps = createInjector(({}:IPermissionManagerInputP
             </CanUpdate>
         </>,
     }, {
-        title: "Description",
+        title: filters.filter("Description", "description"),
         key: "description",
         render: (record) => <>
             <CanUpdate yes>
@@ -95,7 +97,7 @@ const injectPermissionManagerProps = createInjector(({}:IPermissionManagerInputP
         </CanDelete>,
     }];
     
-    return {permissions, isLoading: loader.isLoading, name, description, setName, setDescription, create, update, columns};
+    return {permissions: filters.items, isLoading: loader.isLoading, name, description, setName, setDescription, create, update, columns};
 });
 
 const connect = inject<IPermissionManagerInputProps, PermissionManagerProps>(mergeProps(
