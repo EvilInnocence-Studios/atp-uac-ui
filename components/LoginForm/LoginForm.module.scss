@@ -6,7 +6,8 @@ $loginformWidth: 378px;
     position: fixed;
     border: solid 2px globals.$brand-border;
     width: $loginformWidth;
-    margin: 20vh calc(50% - $loginformWidth / 2);
+    max-width: 100%;
+    margin: 24vh calc(50% - $loginformWidth / 2);
     border-radius: globals.$border-radius-lg;
     color:  globals.$brand-secondary;
     .header {
