@@ -36,6 +36,7 @@ const injectLoginFormProps = createInjector(({}:ILoginFormInputProps):ILoginForm
             prefix: "", firstName: "", lastName: "",
             mustUpdatePassword: false,
             suffix: "",
+            subscriptionId: null,
             createdAt: dayjs().toISOString(),
         }).then(all(createAccountForm.close, modal.close, flash.success("Account created"), login));
     }

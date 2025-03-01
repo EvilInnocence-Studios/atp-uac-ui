@@ -18,7 +18,7 @@ export declare interface ILoginFormProps {
 
 // What gets passed into the component from the parent as attributes
 export declare interface ILoginFormInputProps {
-    inline: boolean;
+    inline?: boolean;
 }
 
 export type LoginFormProps = ILoginFormInputProps & ILoginFormProps;

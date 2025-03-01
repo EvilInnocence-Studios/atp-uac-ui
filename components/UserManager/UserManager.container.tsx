@@ -48,7 +48,18 @@ const injectUserManagerProps = createInjector(({}:IUserManagerInputProps):IUserM
     const [password, setPassword] = useState('');
     const create = () => {
         loader.start();
-        user.create({userName, email, password: 'password', mustUpdatePassword: true, prefix: "", firstName: "", lastName: "", suffix: "", createdAt: dayjs().toISOString()})
+        user.create({
+                userName,
+                email,
+                password: 'password',
+                mustUpdatePassword: true,
+                prefix: "",
+                firstName: "",
+                lastName: "",
+                suffix: "",
+                subscriptionId: null,
+                createdAt: dayjs().toISOString()
+            })
             .then(appendTo(users))
             .then(all(
                 refresh,
