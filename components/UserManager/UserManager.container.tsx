@@ -118,7 +118,7 @@ const injectUserManagerProps = createInjector(({}:IUserManagerInputProps):IUserM
         title: filters.Clear,
         key: "actions",
         render: (record) => <CanDelete yes>
-            <DeleteBtn entityType="permission" onClick={remove(record.id)} />
+            <DeleteBtn entityType="user" onClick={remove(record.id)} />
         </CanDelete>,
     }];
     
