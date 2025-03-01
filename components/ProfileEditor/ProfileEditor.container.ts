@@ -10,7 +10,7 @@ import { useToggle } from "@core/lib/useToggle";
 
 const injectProfileEditorProps = createInjector(({userId}:IProfileEditorInputProps):IProfileEditorProps => {
     const [user, setUser] = useState<SafeUser | null>(null);
-    const [loggedInUser, setLoggedInUser] = useLoggedInUser();
+    const [loggedInUser, setLoggedInUser, refresh] = useLoggedInUser();
     const loader = useLoaderAsync();
     const passwordReset = useToggle();
     const [resetToken, setResetToken] = useState("");
@@ -50,7 +50,7 @@ const injectProfileEditorProps = createInjector(({userId}:IProfileEditorInputPro
         }
     }
     
-    return {user, isLoading: loader.isLoading, update, passwordReset, resetToken, openModal};
+    return {user, isLoading: loader.isLoading, update, passwordReset, resetToken, openModal, refresh};
 });
 
 const connect = inject<IProfileEditorInputProps, ProfileEditorProps>(mergeProps(

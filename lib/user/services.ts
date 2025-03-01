@@ -21,5 +21,7 @@ export const userServices = ({get, post, /*put,*/ patch, remove}:IMethods) => ({
             add: (userId:string, roleId:string):Promise<void> => post(`user/${userId}/role`, {roleId}),
             remove: (userId:string, roleId:string):Promise<void> => remove(`user/${userId}/role/${roleId}`),
         },
+        subscribe: (userId:string, subscriptionId:string):Promise<void> => post(`user/${userId}/subscription`, {subscriptionId}),
+        unsubscribe: (userId:string):Promise<void> => remove(`user/${userId}/subscription`),
     }
 });

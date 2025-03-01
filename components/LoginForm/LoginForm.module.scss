@@ -10,6 +10,13 @@ $loginformWidth: 378px;
     margin: 24vh calc(50% - $loginformWidth / 2);
     border-radius: globals.$border-radius-lg;
     color:  globals.$brand-secondary;
+    &.inline {
+        margin: 0;
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        border-radius: 0;
+    }
     .header {
         text-align: center;
         background-color: globals.$brand-bg-light;

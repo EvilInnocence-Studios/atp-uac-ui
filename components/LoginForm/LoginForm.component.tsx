@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Col, Input, Row } from "antd";
 import { LoginFormProps } from "./LoginForm.d";
 import styles from './LoginForm.module.scss';
+import clsx from "clsx";
 
 export const LoginFormComponent = ({
     userName, setUserName,
@@ -12,13 +13,14 @@ export const LoginFormComponent = ({
     email, setEmail,
     login, forgotPassword, forgotUsername, forgotUserNameForm, createAccountForm,
     modal, createAccount,
+    inline,
 }:LoginFormProps) =>
-    <div className={styles.loginForm}>
-        <div className={styles.header}>
+    <div className={clsx([styles.loginForm, inline && styles.inline])}>
+        {!inline && <div className={styles.header}>
             <img src="/logo.png" alt="EvilInnocence"/>
             {config().appName} Login
             <FontAwesomeIcon icon={faClose} onClick={modal.close} />
-        </div>
+        </div>}
         <div className={styles.form}>
             {(forgotUserNameForm.visible || createAccountForm.visible) &&
                 <Input

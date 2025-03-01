@@ -17,6 +17,7 @@ const emptyUser = {
     firstName: "",
     lastName: "",
     suffix: "",
+    subscriptionId: null,
     createdAt: "",
 };
 const emptyLoggedInUser = {user: emptyUser, loginToken: '', permissions: []};
@@ -28,7 +29,7 @@ export const getCurrentUser = () => useLoggedInUserRaw.getValue().user;
 
 const loadDefaultPermissions = memoizePromise(() => services().permission.default());
 
-export const useLoggedInUser = ():[ILoginResponse, Setter<ILoginResponse>] => {
+export const useLoggedInUser = ():[ILoginResponse, Setter<ILoginResponse>, () => void] => {
     const [user, setUser] = useLoggedInUserRaw();
     const [defaultPermissions, setDefaultPermissions] = useSharedState<IPermission[]>('defaultPermissions', [])();
 
@@ -45,10 +46,16 @@ export const useLoggedInUser = ():[ILoginResponse, Setter<ILoginResponse>] => {
         }
     }, [isLoggedIn(user)]);
 
-    return [user, setUser];
+    const refresh = () => {
+        if (isLoggedIn(user)) {
+            services().profile().then(setUser);
+        }
+    }
+
+    return [user, setUser, refresh];
 }
 
-export const loginServices = ({post}:IMethods) => ({
+export const loginServices = ({get, post}:IMethods) => ({
     login: (req:ILoginRequest) => post('login', req)
         .then(getResults<ILoginResponse>)
         .then((res:ILoginResponse) => {
@@ -57,11 +64,12 @@ export const loginServices = ({post}:IMethods) => ({
         }).catch((err:Error) => {
             notification.error({message: 'Login Failed', description: err.message});
         }),
-
     logout: () => {
         notification.success({message: "You have been logged out"});
         useLoggedInUserRaw.setValue(emptyLoggedInUser);
     },
+    profile: () => get('profile')
+        .then(getResults<ILoginResponse>),
     forgotPassword: (userName: string) => post('user/forgotPassword', {userName})
         .then(() => notification.success({message: 'Password Reset Email Sent'})),
     forgotUsername: (email: string) => post('user/forgotUsername', {email})

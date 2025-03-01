@@ -8,6 +8,7 @@ export declare interface IProfileEditorProps {
     passwordReset: IToggle;
     openModal: () => void;
     resetToken: string;
+    refresh: () => void;
 }
 
 // What gets passed into the component from the parent as attributes
