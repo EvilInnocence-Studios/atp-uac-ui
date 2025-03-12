@@ -1,8 +1,8 @@
 import { config } from "@config";
 import { onInputChange } from "@core/lib/onInputChange";
-import { faClose, faEnvelope, faLock, faSignIn, faUser, faUserPlus } from "@fortawesome/free-solid-svg-icons";
+import { faClose, faEnvelope, faLock, faSignIn, faUser, faUserPlus, faWarning } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button, Col, Input, Row } from "antd";
+import { Alert, Button, Col, Input, Row } from "antd";
 import { LoginFormProps } from "./LoginForm.d";
 import styles from './LoginForm.module.scss';
 import clsx from "clsx";
@@ -22,6 +22,9 @@ export const LoginFormComponent = ({
             <FontAwesomeIcon icon={faClose} onClick={modal.close} />
         </div>}
         <div className={styles.form}>
+            <Alert message={<>
+                <FontAwesomeIcon icon={faWarning} /> If this is your first time logging into the new site, you will need to reset your password.  Your username will be your email address.
+            </>} type="warning" style={{textAlign: "left"}} />
             {(forgotUserNameForm.visible || createAccountForm.visible) &&
                 <Input
                     addonBefore={<FontAwesomeIcon icon={faEnvelope} />}
