@@ -5,11 +5,24 @@ import { onInputChange } from "@core/lib/onInputChange";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRefresh } from "@fortawesome/free-solid-svg-icons";
 
-export const PasswordResetComponent = ({newPassword, setNewPassword, update}:PasswordResetProps) =>
+export const PasswordResetComponent = ({userId, newPassword, setNewPassword, oldPassword, setOldPassword, update, requireOldPassword}:PasswordResetProps) =>
     <div className={styles.passwordReset}>
-        <h1>Reset Password</h1>
+        <h1>Reset Password ({userId})</h1>
         
-        <Input.Password addonBefore = "New Password" value={newPassword} onChange={onInputChange(setNewPassword)} />
+        {requireOldPassword && <Input.Password
+            addonBefore = "Old Password"
+            value={oldPassword}
+            onChange={onInputChange(setOldPassword)}
+            placeholder="Old Password"
+        />}
+
+        <Input.Password
+            addonBefore = "New Password"
+            value={newPassword}
+            onChange={onInputChange(setNewPassword)}
+            onPressEnter={update}
+            placeholder="New Password"
+        />
         <Button onClick={update} type="primary" size="large">
             <FontAwesomeIcon icon={faRefresh} /> Update Password
         </Button>

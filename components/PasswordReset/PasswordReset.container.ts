@@ -6,22 +6,31 @@ import { useState } from "react";
 import { services } from "@core/lib/api";
 import { flash } from "@core/lib/flash";
 
-const injectPasswordResetProps = createInjector(({resetToken, onUpdate = () => {}}:IPasswordResetInputProps):IPasswordResetProps => {
+const injectPasswordResetProps = createInjector(({userId, onUpdate = () => {}, successMsg, failMsg}:IPasswordResetInputProps):IPasswordResetProps => {
     const [search] = useSearchParams();
     const [newPassword, setNewPassword] = useState("");
+    const [oldPassword, setOldPassword] = useState("");
 
-    const {token} = resetToken
-        ? {token: resetToken}
-        : Object.fromEntries(search.entries()) as unknown as {token: string};
+    const query = Object.fromEntries(search.entries()) as unknown as {token?: string};
+    const token = query.token || undefined;
+console.log("Info", token, userId);
+    const cmd =
+        token  ? () => services().user.resetPassword(token, newPassword) :
+        userId ? () => services().user.resetPasswordByUser(userId, oldPassword, newPassword) :
+                 () => Promise.reject("No userId or password reset token provided");
 
     const update = () => {
-        services().user.resetPassword(token, newPassword)
-            .then(flash.success("Password updated.  Please login with your new password."))
+        cmd()
+            .then(flash.success(successMsg || "Password updated.  Please login with your new password."))
             .then(onUpdate)
-            .catch(flash.error("Password update failed.  Please try again."));
+            .then(() => {
+                setNewPassword("");
+                setOldPassword("");
+            })
+            .catch(flash.error(failMsg || "Password update failed.  Please try again."));
     }
 
-    return {newPassword, setNewPassword, update};
+    return {newPassword, setNewPassword, oldPassword, setOldPassword, update, requireOldPassword: !token};
 });
 
 const connect = inject<IPasswordResetInputProps, PasswordResetProps>(mergeProps(

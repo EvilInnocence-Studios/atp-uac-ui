@@ -7,7 +7,6 @@ export declare interface IProfileEditorProps {
     update: (field:keyof SafeUser) => (value:string) => void;
     passwordReset: IToggle;
     openModal: () => void;
-    resetToken: string;
     refresh: () => void;
 }
 

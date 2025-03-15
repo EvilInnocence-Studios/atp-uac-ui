@@ -13,7 +13,6 @@ const injectProfileEditorProps = createInjector(({userId}:IProfileEditorInputPro
     const [loggedInUser, setLoggedInUser, refresh] = useLoggedInUser();
     const loader = useLoaderAsync();
     const passwordReset = useToggle();
-    const [resetToken, setResetToken] = useState("");
 
     useEffect(() => {
         if (userId) {
@@ -40,17 +39,7 @@ const injectProfileEditorProps = createInjector(({userId}:IProfileEditorInputPro
         }
     }
 
-    const openModal = () => {
-        if(user) {
-            loader(async () => {
-                services().user.getPasswordResetToken(user.userName)
-                .then(setResetToken)
-                .then(passwordReset.on);
-            });
-        }
-    }
-    
-    return {user, isLoading: loader.isLoading, update, passwordReset, resetToken, openModal, refresh};
+    return {user, isLoading: loader.isLoading, update, passwordReset, openModal: passwordReset.on, refresh};
 });
 
 const connect = inject<IProfileEditorInputProps, ProfileEditorProps>(mergeProps(

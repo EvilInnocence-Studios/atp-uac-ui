@@ -7,14 +7,18 @@ import { PasswordReset } from "../PasswordReset";
 import { ProfileEditorProps } from "./ProfileEditor.d";
 import styles from './ProfileEditor.module.scss';
 
-export const ProfileEditorComponent = ({user, isLoading, update, title, resetToken, passwordReset, openModal, refresh}:ProfileEditorProps) =>
+export const ProfileEditorComponent = ({user, isLoading, update, title, passwordReset, openModal, refresh}:ProfileEditorProps) =>
     <Spin spinning={isLoading}>
         <Modal
             open={passwordReset.isset}
             onCancel={passwordReset.off}
             footer={null}
         >
-            <PasswordReset resetToken={resetToken} onUpdate={passwordReset.off} />
+            <PasswordReset
+                userId={user?.id}
+                onUpdate={passwordReset.off}
+                successMsg="Password updated."
+            />
         </Modal>
         <div className={styles.profileEditor}>
             <h1>

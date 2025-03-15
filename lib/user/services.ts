@@ -12,7 +12,8 @@ export const userServices = ({get, post, /*put,*/ patch, remove}:IMethods) => ({
             .then(getResults<SafeUser[]>),
         get: (id:string):Promise<SafeUser> => get(`user/${id}`),
         update: (id:string, user:Partial<UserUpdate>):Promise<SafeUser> => patch(`user/${id}`, user),
-        resetPassword: (token:string, newPassword:string):Promise<void> => post('user/resetPassword', {token, newPassword}),
+        resetPassword: (token: string, newPassword:string):Promise<void> => post('user/resetPassword', {token, newPassword}),
+        resetPasswordByUser: (userId:string, oldPassword:string, newPassword:string):Promise<void> => post(`user/${userId}/resetPassword`, {oldPassword, newPassword}),
         getPasswordResetToken: (userName:string):Promise<string> => get(`user/passwordResetToken`, {userName}).then(getResults<string>),
         remove: (id:string):Promise<void> => remove(`user/${id}`, {}),
         role: {
