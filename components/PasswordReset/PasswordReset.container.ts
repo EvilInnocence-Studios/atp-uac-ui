@@ -1,7 +1,7 @@
 import { createInjector, inject, mergeProps } from "unstateless";
 import {PasswordResetComponent} from "./PasswordReset.component";
 import {IPasswordResetInputProps, PasswordResetProps, IPasswordResetProps} from "./PasswordReset.d";
-import { useSearchParams } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import { useState } from "react";
 import { services } from "@core/lib/api";
 import { flash } from "@core/lib/flash";
@@ -10,10 +10,11 @@ const injectPasswordResetProps = createInjector(({userId, onUpdate = () => {}, s
     const [search] = useSearchParams();
     const [newPassword, setNewPassword] = useState("");
     const [oldPassword, setOldPassword] = useState("");
+    const navigate = useNavigate();
 
     const query = Object.fromEntries(search.entries()) as unknown as {token?: string};
     const token = query.token || undefined;
-console.log("Info", token, userId);
+
     const cmd =
         token  ? () => services().user.resetPassword(token, newPassword) :
         userId ? () => services().user.resetPasswordByUser(userId, oldPassword, newPassword) :
@@ -26,6 +27,9 @@ console.log("Info", token, userId);
             .then(() => {
                 setNewPassword("");
                 setOldPassword("");
+                if(token) {
+                    navigate("/");
+                }
             })
             .catch(flash.error(failMsg || "Password update failed.  Please try again."));
     }
