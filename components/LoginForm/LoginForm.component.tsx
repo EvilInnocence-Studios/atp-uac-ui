@@ -45,6 +45,7 @@ export const LoginFormComponent = ({
                     value={password}
                     placeholder="Password"
                     onChange={onInputChange(setPassword)}
+                    onPressEnter={!!userName && !!password ? login : undefined}
                 />
             </>}
             {!createAccountForm.visible && !forgotUserNameForm.visible && <>
