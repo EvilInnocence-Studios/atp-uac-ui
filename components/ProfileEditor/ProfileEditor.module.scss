@@ -2,9 +2,17 @@
 
 .profileEditor {
     margin-right: globals.$padding;
+    position: relative;
     max-width: 768px;
     > div > div {
         margin-bottom: globals.$padding;
+    }
+
+    .refreshButton {
+        position: absolute;
+        width: auto;
+        right: 0;
+        top: 0;
     }
 
     .nameEdit {

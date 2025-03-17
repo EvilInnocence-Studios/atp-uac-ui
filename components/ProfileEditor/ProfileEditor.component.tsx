@@ -6,6 +6,9 @@ import { Button, Col, Modal, Row, Spin } from "antd";
 import { PasswordReset } from "../PasswordReset";
 import { ProfileEditorProps } from "./ProfileEditor.d";
 import styles from './ProfileEditor.module.scss';
+import { hasPermission } from "../HasPermission";
+
+const IsAdmin = hasPermission('user.admin');
 
 export const ProfileEditorComponent = ({user, isLoading, update, title, passwordReset, openModal, refresh}:ProfileEditorProps) =>
     <Spin spinning={isLoading}>
@@ -21,15 +24,18 @@ export const ProfileEditorComponent = ({user, isLoading, update, title, password
             />
         </Modal>
         <div className={styles.profileEditor}>
-            <h1>
-                {title || "Profile Editor"}
+            <IsAdmin yes>
                 <Button
                     type="link"
-                    style={{display: "inline-block", width: "32px"}}
+                    className={styles.refreshButton}
                     onClick={refresh}
                 >
                     <FontAwesomeIcon icon={faRefresh} />
+                    Refresh profile
                 </Button>
+            </IsAdmin>
+            <h1>
+                {title || "Profile Editor"}
             </h1>
             {user && <Row gutter={16}>
                 <Col xs={24} md={8}><Label label="Username"><Editable value={user.userName} onChange={update('userName')} /></Label></Col>
