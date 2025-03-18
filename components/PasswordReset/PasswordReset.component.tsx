@@ -5,7 +5,7 @@ import { onInputChange } from "@core/lib/onInputChange";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRefresh } from "@fortawesome/free-solid-svg-icons";
 
-export const PasswordResetComponent = ({userId, newPassword, setNewPassword, oldPassword, setOldPassword, update, requireOldPassword}:PasswordResetProps) =>
+export const PasswordResetComponent = ({newPassword, setNewPassword, oldPassword, setOldPassword, update, requireOldPassword}:PasswordResetProps) =>
     <div className={styles.passwordReset}>
         <h1>Reset Password</h1>
         
