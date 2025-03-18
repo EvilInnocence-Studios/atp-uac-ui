@@ -61,7 +61,7 @@ export const loginServices = ({get, post}:IMethods) => ({
         .then((res:ILoginResponse) => {
             useLoggedInUserRaw.setValue(res);
             notification.success({message: 'Login Successful'});
-        }).catch((err:Error) => {
+        }).catch(() => {
             notification.error({message: 'Login Failed'});
         }),
     logout: () => {
