@@ -7,7 +7,7 @@ import { faRefresh } from "@fortawesome/free-solid-svg-icons";
 
 export const PasswordResetComponent = ({userId, newPassword, setNewPassword, oldPassword, setOldPassword, update, requireOldPassword}:PasswordResetProps) =>
     <div className={styles.passwordReset}>
-        <h1>Reset Password ({userId})</h1>
+        <h1>Reset Password</h1>
         
         {requireOldPassword && <Input.Password
             addonBefore = "Old Password"
