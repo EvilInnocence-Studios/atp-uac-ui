@@ -22,9 +22,6 @@ export const LoginFormComponent = ({
             <FontAwesomeIcon icon={faClose} onClick={modal.close} />
         </div>}
         <div className={styles.form}>
-            <Alert message={<>
-                <FontAwesomeIcon icon={faWarning} /> If this is your first time logging into the new site, you will need to reset your password.  Your username will be your email address.
-            </>} type="warning" style={{textAlign: "left"}} />
             {(forgotUserNameForm.visible || createAccountForm.visible) &&
                 <Input
                     addonBefore={<FontAwesomeIcon icon={faEnvelope} />}
@@ -48,6 +45,9 @@ export const LoginFormComponent = ({
                     onPressEnter={!!userName && !!password ? login : undefined}
                 />
             </>}
+            <Alert message={<>
+                <FontAwesomeIcon icon={faWarning} /> If this is your first time logging into the new site, you will need to reset your password.  Your username will be your email address.
+            </>} type="warning" style={{textAlign: "left"}} />
             {!createAccountForm.visible && !forgotUserNameForm.visible && <>
                 <Row className={styles.links}>
                     <Col xs={12}>
