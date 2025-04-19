@@ -70,8 +70,6 @@ export const loginServices = ({get, post}:IMethods) => ({
     },
     profile: () => get('profile')
         .then(getResults<ILoginResponse>),
-    forgotPassword: (userName: string) => post('user/forgotPassword', {userName})
-        .then(() => notification.success({message: 'Password Reset Email Sent'})),
-    forgotUsername: (email: string) => post('user/forgotUsername', {email})
-        .then(() => notification.success({message: 'Username Reminder Email Sent'})),
+    forgotLogin: (email: string) => post('user/forgotLogin', {email})
+        .then(() => notification.success({message: 'Email Sent'})),
 });

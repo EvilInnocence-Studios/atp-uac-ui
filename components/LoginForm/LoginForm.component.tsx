@@ -11,7 +11,7 @@ export const LoginFormComponent = ({
     userName, setUserName,
     password, setPassword,
     email, setEmail,
-    login, forgotPassword, forgotUsername, forgotUserNameForm, createAccountForm,
+    login, forgotLogin, forgotLoginForm, createAccountForm,
     modal, createAccount,
     inline,
 }:LoginFormProps) =>
@@ -22,7 +22,7 @@ export const LoginFormComponent = ({
             <FontAwesomeIcon icon={faClose} onClick={modal.close} />
         </div>}
         <div className={styles.form}>
-            {(forgotUserNameForm.visible || createAccountForm.visible) &&
+            {(forgotLoginForm.visible || createAccountForm.visible) &&
                 <Input
                     addonBefore={<FontAwesomeIcon icon={faEnvelope} />}
                     value={email}
@@ -30,7 +30,7 @@ export const LoginFormComponent = ({
                     onChange={onInputChange(setEmail)}
                 />
             }
-            {!forgotUserNameForm.visible && <>
+            {!forgotLoginForm.visible && <>
                 <Input
                     addonBefore={<FontAwesomeIcon icon={faUser} />}
                     value={userName}
@@ -48,29 +48,24 @@ export const LoginFormComponent = ({
             <Alert message={<>
                 <FontAwesomeIcon icon={faWarning} /> If this is your first time logging into the new site, you will need to reset your password.  Your username will be your email address.
             </>} type="warning" style={{textAlign: "left"}} />
-            {!createAccountForm.visible && !forgotUserNameForm.visible && <>
+            {!createAccountForm.visible && !forgotLoginForm.visible && <>
                 <Row className={styles.links}>
-                    <Col xs={12}>
-                        <Button type="link" className={styles.forgotUsername} size="small" onClick={forgotUserNameForm.open}>
-                            Forgot Username?
-                        </Button>
-                    </Col>
-                    <Col xs={12}>
-                        <Button type="link" disabled={userName === ""} className={styles.forgotPassword} size="small" onClick={forgotPassword}>
-                            Forgot Password?
+                    <Col xs={24}>
+                        <Button type="link" className={styles.forgotUsername} size="small" onClick={forgotLoginForm.open}>
+                            Forgot Username / password?
                         </Button>
                     </Col>
                 </Row>
             </>}
             <Row className={styles.links}>
-                {forgotUserNameForm.visible && <>
+                {forgotLoginForm.visible && <>
                     <Col xs={12}>
-                        <Button type="link" disabled={email === ""} onClick={forgotUsername} className={styles.forgotUsername}>
-                            Send Reminder
+                        <Button type="link" disabled={email === ""} onClick={forgotLogin} className={styles.forgotUsername}>
+                            Send Reminder / reset link
                         </Button>
                     </Col>
                     <Col xs={12}>
-                        <Button type="link" onClick={forgotUserNameForm.close} className={styles.forgotPassword}>
+                        <Button type="link" onClick={forgotLoginForm.close} className={styles.forgotPassword}>
                             Cancel
                         </Button>
                     </Col>
@@ -85,7 +80,7 @@ export const LoginFormComponent = ({
         </div>
         <div className={styles.footer}>
             <Row>
-                {!forgotUserNameForm.visible && <Col xs={createAccountForm.visible ? 24 : 12}>
+                {!forgotLoginForm.visible && <Col xs={createAccountForm.visible ? 24 : 12}>
                     <Button
                         type={createAccountForm.visible ? "primary" : "default"}
                         className={styles.register}
@@ -94,7 +89,7 @@ export const LoginFormComponent = ({
                         <FontAwesomeIcon icon={faUserPlus} /> Create Account
                     </Button>
                 </Col>}
-                {!forgotUserNameForm.visible && !createAccountForm.visible && <Col xs={12}>
+                {!forgotLoginForm.visible && !createAccountForm.visible && <Col xs={12}>
                     <Button type="primary" onClick={login} disabled={userName === "" || password === ""}>
                         <FontAwesomeIcon icon={faSignIn} /> Login
                     </Button>

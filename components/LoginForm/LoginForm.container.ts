@@ -13,7 +13,7 @@ const injectLoginFormProps = createInjector(({}:ILoginFormInputProps):ILoginForm
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
-    const forgotUserNameForm = useModal();
+    const forgotLoginForm = useModal();
     const createAccountForm = useModal();
     const modal = useLoginForm();
 
@@ -21,13 +21,9 @@ const injectLoginFormProps = createInjector(({}:ILoginFormInputProps):ILoginForm
         services().login({userName, password});
     }
 
-    const forgotPassword = () => {
-        services().forgotPassword(userName);
-    }
-
-    const forgotUsername = () => {
-        services().forgotUsername(email);
-        forgotUserNameForm.close();
+    const forgotLogin = () => {
+        services().forgotLogin(email);
+        forgotLoginForm.close();
     }
 
     const createAccount = () => {
@@ -45,7 +41,7 @@ const injectLoginFormProps = createInjector(({}:ILoginFormInputProps):ILoginForm
         userName, setUserName,
         password, setPassword,
         email, setEmail,
-        login, forgotPassword, forgotUsername, forgotUserNameForm, modal,
+        login, forgotLogin, forgotLoginForm, modal,
         createAccountForm, createAccount
     };
 });

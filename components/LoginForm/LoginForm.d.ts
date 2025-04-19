@@ -8,9 +8,8 @@ export declare interface ILoginFormProps {
     setPassword: (password: string) => void;
     setEmail: (email: string) => void;
     login: () => void;
-    forgotPassword: () => void;
-    forgotUsername: () => void;
-    forgotUserNameForm: IModal;
+    forgotLogin: () => void;
+    forgotLoginForm: IModal;
     createAccountForm: IModal;
     createAccount: () => void;
     modal:IModal;
