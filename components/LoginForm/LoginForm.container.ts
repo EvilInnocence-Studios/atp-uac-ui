@@ -8,8 +8,10 @@ import { useLoginForm } from "@uac/lib/useLoginForm";
 import dayjs from "dayjs";
 import { all } from "ts-functional";
 import { flash } from "@core/lib/flash";
+import { useSetting } from "@common/lib/setting/services";
 
 const injectLoginFormProps = createInjector(({}:ILoginFormInputProps):ILoginFormProps => {
+    const appName = useSetting("siteName");
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
@@ -38,6 +40,7 @@ const injectLoginFormProps = createInjector(({}:ILoginFormInputProps):ILoginForm
     }
 
     return {
+        appName,
         userName, setUserName,
         password, setPassword,
         email, setEmail,

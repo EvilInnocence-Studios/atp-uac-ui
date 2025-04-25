@@ -1,13 +1,13 @@
-import { config } from "@config";
 import { onInputChange } from "@core/lib/onInputChange";
 import { faClose, faEnvelope, faLock, faSignIn, faUser, faUserPlus, faWarning } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Alert, Button, Col, Input, Row } from "antd";
+import clsx from "clsx";
 import { LoginFormProps } from "./LoginForm.d";
 import styles from './LoginForm.module.scss';
-import clsx from "clsx";
 
 export const LoginFormComponent = ({
+    appName,
     userName, setUserName,
     password, setPassword,
     email, setEmail,
@@ -18,7 +18,7 @@ export const LoginFormComponent = ({
     <div className={clsx([styles.loginForm, inline && styles.inline])}>
         {!inline && <div className={styles.header}>
             <img src="/logo.png" alt="EvilInnocence"/>
-            {config().appName} Login
+            {appName} Login
             <FontAwesomeIcon icon={faClose} onClick={modal.close} />
         </div>}
         <div className={styles.form}>

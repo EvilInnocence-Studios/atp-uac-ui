@@ -1,6 +1,7 @@
 import { IModal } from "@core/lib/useModal";
 
 export declare interface ILoginFormProps {
+    appName: string;
     userName: string;
     password: string;
     email: string;
