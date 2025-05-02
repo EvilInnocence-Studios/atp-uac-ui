@@ -8,6 +8,8 @@ import { hasPermission } from "../HasPermission";
 import { UserRoleManager } from "../UserRoleManager";
 import { UserManagerProps } from "./UserManager.d";
 import styles from './UserManager.module.scss';
+import { MyAccount } from "@store/components/MyAccount";
+import { UserOrderList } from "@store/components/UserOrderList";
 
 const CanView = hasPermission("user.view");
 const CanCreate = hasPermission("user.create");
@@ -38,7 +40,10 @@ export const UserManagerComponent = ({users, isLoading, userName, email, passwor
                             rowKey="id"
                             columns={columns}
                             size="small"
-                            expandable={{expandedRowRender: u => <UserRoleManager user={u} />}}
+                            expandable={{expandedRowRender: u => <>
+                                <UserRoleManager user={u} />
+                                <UserOrderList userId={u.id}/>
+                            </>}}
                         />
                     </CanView>
                     <CanView no>
