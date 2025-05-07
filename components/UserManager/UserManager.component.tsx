@@ -1,6 +1,7 @@
 import { onInputChange } from "@core/lib/onInputChange";
 import { faAdd, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { UserOrderList } from "@store/components/UserOrderList";
 import { SafeUser } from "@uac-shared/user/types";
 import { Alert, Button, Card, Col, Input, Row, Spin, Table } from "antd";
 import { prop, sort } from "ts-functional";
@@ -8,8 +9,6 @@ import { hasPermission } from "../HasPermission";
 import { UserRoleManager } from "../UserRoleManager";
 import { UserManagerProps } from "./UserManager.d";
 import styles from './UserManager.module.scss';
-import { MyAccount } from "@store/components/MyAccount";
-import { UserOrderList } from "@store/components/UserOrderList";
 
 const CanView = hasPermission("user.view");
 const CanCreate = hasPermission("user.create");
