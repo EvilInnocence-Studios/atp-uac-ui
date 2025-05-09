@@ -14,12 +14,14 @@ import { createInjector, inject, mergeProps } from "unstateless";
 import { hasPermission } from "../HasPermission";
 import { UserManagerComponent } from "./UserManager.component";
 import { IUserManagerInputProps, IUserManagerProps, UserManagerProps } from "./UserManager.d";
+import { IOrder } from "@store-shared/order/types";
 
 const CanUpdate = hasPermission("user.update");
 const CanDelete = hasPermission("user.delete");
 
 const injectUserManagerProps = createInjector(({}:IUserManagerInputProps):IUserManagerProps => {
     const [users, setUsers] = useState<SafeUser[]>([]);
+    const [orderId, setOrderId] = useState<string | undefined>(undefined);
     const loader =  useLoader();
 
     const user = services().user;
@@ -132,8 +134,16 @@ const injectUserManagerProps = createInjector(({}:IUserManagerInputProps):IUserM
             <DeleteBtn entityType="user" onClick={remove(record.id)} />
         </CanDelete>,
     }];
+
+    const onSelectOrder = (order: IOrder) => () => {
+        setOrderId(order.id);
+    }
     
-    return {users: filters.items, isLoading: loader.isLoading, userName, email, password, setUserName, setEmail, setPassword, create, update, columns};
+    return {
+        users: filters.items, isLoading: loader.isLoading, userName, email, password,
+        setUserName, setEmail, setPassword, create, update,
+        columns, orderId, onSelectOrder,
+    };
 
 });
 

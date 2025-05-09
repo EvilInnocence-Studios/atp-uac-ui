@@ -12,7 +12,8 @@ export declare interface IUserManagerProps {
     create: () => void;
     update: (id:string, field: string) => (value: any) => void;
     columns: ColumnType<SafeUser>[];
-
+    orderId?: string;
+    onSelectOrder?: (order: IOrder) => () => void;
 }
 
 // What gets passed into the component from the parent as attributes

@@ -13,7 +13,11 @@ import styles from './UserManager.module.scss';
 const CanView = hasPermission("user.view");
 const CanCreate = hasPermission("user.create");
 
-export const UserManagerComponent = ({users, isLoading, userName, email, password, setUserName, setEmail, setPassword, create, columns}:UserManagerProps) =>
+export const UserManagerComponent = ({
+    users, isLoading, userName, email, password,
+    setUserName, setEmail, setPassword, create,
+    columns, orderId, onSelectOrder,
+}:UserManagerProps) =>
     <div className={styles.permissionManager}>
         <h1><FontAwesomeIcon icon={faUser} /> Users</h1>
 
@@ -41,7 +45,7 @@ export const UserManagerComponent = ({users, isLoading, userName, email, passwor
                             size="small"
                             expandable={{expandedRowRender: u => <>
                                 <UserRoleManager user={u} />
-                                <UserOrderList userId={u.id}/>
+                                <UserOrderList userId={u.id} id={orderId} onSelectOrder={onSelectOrder}/>
                             </>}}
                         />
                     </CanView>
