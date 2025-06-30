@@ -1,4 +1,4 @@
-import { IModule } from "@core/lib/module";
+import { IModule } from "@core-shared/module";
 import { uacMenus } from "./lib/menus";
 import { uacRoutes } from "./lib/routes";
 
