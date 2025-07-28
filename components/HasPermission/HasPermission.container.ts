@@ -1,14 +1,12 @@
+import { usePermissions } from "@uac/lib/permission/usePermissions";
 import { createInjector, inject, mergeProps } from "unstateless";
-import {HasPermissionComponent} from "./HasPermission.component";
-import {IHasPermissionInputProps, HasPermissionProps, IHasPermissionProps} from "./HasPermission.d";
-import { useLoggedInUser } from "@uac/lib/login/services";
-import { intersection, prop } from "ts-functional";
+import { HasPermissionComponent } from "./HasPermission.component";
+import { HasPermissionProps, IHasPermissionInputProps, IHasPermissionProps } from "./HasPermission.d";
 
 const injectHasPermissionProps = createInjector(({permissions, yes, no}:IHasPermissionInputProps):IHasPermissionProps => {
-    const [loggedInUser] = useLoggedInUser();
-    const hasPermission = intersection(permissions, loggedInUser.permissions.map(prop("name"))).length > 0;
+    const {hasAnyPermission} = usePermissions();
 
-    return yes && hasPermission || no && !hasPermission
+    return yes && hasAnyPermission(permissions) || no && !hasAnyPermission(permissions)
         ? {show: true}
         : {show: false};
 });
