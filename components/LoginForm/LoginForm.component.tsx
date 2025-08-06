@@ -1,7 +1,7 @@
 import { onInputChange } from "@core/lib/onInputChange";
-import { faClose, faEnvelope, faLock, faSignIn, faUser, faUserPlus, faWarning } from "@fortawesome/free-solid-svg-icons";
+import { faClose, faEnvelope, faLock, faSignIn, faUser, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Alert, Button, Col, Input, Row } from "antd";
+import { Button, Col, Input, Row } from "antd";
 import clsx from "clsx";
 import { LoginFormProps } from "./LoginForm.d";
 import styles from './LoginForm.module.scss';
