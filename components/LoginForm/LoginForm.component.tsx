@@ -45,9 +45,6 @@ export const LoginFormComponent = ({
                     onPressEnter={!!userName && !!password ? login : undefined}
                 />
             </>}
-            <Alert message={<>
-                <FontAwesomeIcon icon={faWarning} /> If this is your first time logging into the new site, you will need to reset your password.  Your username will be your email address.
-            </>} type="warning" style={{textAlign: "left"}} />
             {!createAccountForm.visible && !forgotLoginForm.visible && <>
                 <Row className={styles.links}>
                     <Col xs={24}>
