@@ -17,7 +17,7 @@ export const LoginFormComponent = ({
 }:LoginFormProps) =>
     <div className={clsx([styles.loginForm, inline && styles.inline])}>
         {!inline && <div className={styles.header}>
-            <img src="/logo.png" alt="EvilInnocence"/>
+            <img src="/logo.png"/>
             {appName} Login
             <FontAwesomeIcon icon={faClose} onClick={modal.close} />
         </div>}
