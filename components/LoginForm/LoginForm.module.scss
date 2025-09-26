@@ -10,7 +10,7 @@ $loginformWidth: 378px;
     left: 50%;
     top: 128px;
     transform: translateX(-50%);
-    border-radius: globals.$border-radius-lg;
+    border-radius: var(--borderRadiusLarge);
     color:  var(--secondaryColor);
     @media (max-width: 600px) {
         top: 16px;
@@ -25,8 +25,8 @@ $loginformWidth: 378px;
     .header {
         text-align: center;
         background-color: var(--bgLightColor);
-        border-top-left-radius: globals.$border-radius-lg;
-        border-top-right-radius: globals.$border-radius-lg;
+        border-top-left-radius: var(--borderRadiusLarge);
+        border-top-right-radius: var(--borderRadiusLarge);
         font-weight: bold;
         position: relative;
         padding: var(--paddingSmall);
@@ -64,8 +64,8 @@ $loginformWidth: 378px;
     }
     .footer {
         background-color: var(--bgLightColor);
-        border-bottom-left-radius: globals.$border-radius-lg;
-        border-bottom-right-radius: globals.$border-radius-lg;
+        border-bottom-left-radius: var(--borderRadiusLarge);
+        border-bottom-right-radius: var(--borderRadiusLarge);
         font-weight: bold;
         text-align: center;
         padding: var(--paddingSmall);
