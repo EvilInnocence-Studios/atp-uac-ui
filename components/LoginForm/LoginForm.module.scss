@@ -4,14 +4,14 @@ $loginformWidth: 378px;
 
 .loginForm {
     position: fixed;
-    border: solid 2px globals.$brand-border;
+    border: solid 2px var(--borderColor);
     width: $loginformWidth;
     max-width: calc(100% - 64px);
     left: 50%;
     top: 128px;
     transform: translateX(-50%);
     border-radius: globals.$border-radius-lg;
-    color:  globals.$brand-secondary;
+    color:  var(--secondaryColor);
     @media (max-width: 600px) {
         top: 16px;
     }
@@ -24,7 +24,7 @@ $loginformWidth: 378px;
     }
     .header {
         text-align: center;
-        background-color: globals.$brand-bg-light;
+        background-color: var(--bgLightColor);
         border-top-left-radius: globals.$border-radius-lg;
         border-top-right-radius: globals.$border-radius-lg;
         font-weight: bold;
@@ -45,7 +45,7 @@ $loginformWidth: 378px;
     }
     .form {
         padding: globals.$padding-sm globals.$padding 0 globals.$padding;
-        background-color: globals.$brand-bg;
+        background-color: var(--bgColor);
         > :global(.ant-input-group-wrapper) {
             display: block;
             margin: 0 0 globals.$padding-sm 0;
@@ -63,7 +63,7 @@ $loginformWidth: 378px;
         }
     }
     .footer {
-        background-color: globals.$brand-bg-light;
+        background-color: var(--bgLightColor);
         border-bottom-left-radius: globals.$border-radius-lg;
         border-bottom-right-radius: globals.$border-radius-lg;
         font-weight: bold;
