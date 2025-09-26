@@ -2,6 +2,6 @@
 
 .newPermissionForm {
     input {
-        margin-bottom: globals.$padding;
+        margin-bottom: var(--padding);
     }
 }

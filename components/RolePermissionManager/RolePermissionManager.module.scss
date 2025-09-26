@@ -3,7 +3,7 @@
 .rolePermissionManager {
     .buttonGroup {
         display: inline-block;
-        margin: globals.$padding-sm;
+        margin: var(--paddingSmall);
         > span {
             display: inline-block;
             border-color: var(--borderColor);
