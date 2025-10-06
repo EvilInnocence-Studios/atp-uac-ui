@@ -7,5 +7,13 @@
 }
 
 .accountMenu {
-    margin: var(--paddingSmall) !important;
+    ul {
+        border: solid 4px var(--borderColor);
+    }
+}
+
+.accountMenuButton {
+    margin-top: -16px;
+    background-color: transparent;
+    border: none !important;
 }

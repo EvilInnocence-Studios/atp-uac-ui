@@ -18,6 +18,7 @@ const injectAccountMenuProps = createInjector(({}:IAccountMenuInputProps):IAccou
         label: <span className={styles.userName}>{user.user.userName}</span>,
         key: "account",
         icon: <FontAwesomeIcon icon={faUser} />,
+        popupClassName: styles.accountMenu,
         children: [{
             label: "My Account",
             key: "my-account",
