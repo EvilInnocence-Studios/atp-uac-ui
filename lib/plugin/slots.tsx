@@ -6,8 +6,15 @@ export declare interface IMyAccountTabProps {
     id?: string;
 }
 
+export declare interface IUserManagerTabProps {
+    userId?: string;
+}
+
 export const uacPlugins = {
     myAccount: {
         tabs: tabPlugins<IMyAccountTabProps>(),
+    },
+    userManager: {
+        tabs: tabPlugins<IUserManagerTabProps>("top"),
     }
 }

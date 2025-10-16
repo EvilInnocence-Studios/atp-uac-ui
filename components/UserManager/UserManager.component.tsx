@@ -1,8 +1,8 @@
 import { onInputChange } from "@core/lib/onInputChange";
 import { faAdd, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { UserOrderList } from "@store/components/UserOrderList";
 import { SafeUser } from "@uac-shared/user/types";
+import { uacPlugins } from "@uac/lib/plugin/slots";
 import { Alert, Button, Card, Col, Input, Row, Spin, Table } from "antd";
 import { prop, sort } from "ts-functional";
 import { hasPermission } from "../HasPermission";
@@ -16,7 +16,7 @@ const CanCreate = hasPermission("user.create");
 export const UserManagerComponent = ({
     users, isLoading, userName, email, password,
     setUserName, setEmail, setPassword, create,
-    columns, orderId, onSelectOrder,
+    columns,
 }:UserManagerProps) =>
     <div className={styles.permissionManager}>
         <h1><FontAwesomeIcon icon={faUser} /> Users</h1>
@@ -45,7 +45,7 @@ export const UserManagerComponent = ({
                             size="small"
                             expandable={{expandedRowRender: u => <>
                                 <UserRoleManager user={u} />
-                                <UserOrderList userId={u.id} id={orderId} onSelectOrder={onSelectOrder}/>
+                                {uacPlugins.userManager.tabs.render({userId: u.id})}
                             </>}}
                         />
                     </CanView>
