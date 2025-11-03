@@ -1,12 +1,13 @@
-import { createInjector, inject, mergeProps } from "unstateless";
-import {ProfileEditorComponent} from "./ProfileEditor.component";
-import {IProfileEditorInputProps, ProfileEditorProps, IProfileEditorProps} from "./ProfileEditor.d";
-import { useEffect, useState } from "react";
-import { SafeUser } from "@uac-shared/user/types";
-import { useLoaderAsync } from "@core/lib/useLoader";
 import { services } from "@core/lib/api";
-import { useLoggedInUser } from "@uac/lib/login/services";
+import { overridable } from "@core/lib/overridable";
+import { useLoaderAsync } from "@core/lib/useLoader";
 import { useToggle } from "@core/lib/useToggle";
+import { SafeUser } from "@uac-shared/user/types";
+import { useLoggedInUser } from "@uac/lib/login/services";
+import { useEffect, useState } from "react";
+import { createInjector, inject, mergeProps } from "unstateless";
+import { ProfileEditorComponent } from "./ProfileEditor.component";
+import { IProfileEditorInputProps, IProfileEditorProps, ProfileEditorProps } from "./ProfileEditor.d";
 
 const injectProfileEditorProps = createInjector(({userId}:IProfileEditorInputProps):IProfileEditorProps => {
     const [user, setUser] = useState<SafeUser | null>(null);
@@ -46,4 +47,4 @@ const connect = inject<IProfileEditorInputProps, ProfileEditorProps>(mergeProps(
     injectProfileEditorProps,
 ));
 
-export const ProfileEditor = connect(ProfileEditorComponent);
+export const ProfileEditor = overridable<IProfileEditorInputProps>(connect(ProfileEditorComponent));

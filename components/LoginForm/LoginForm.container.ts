@@ -1,14 +1,15 @@
-import { createInjector, inject, mergeProps } from "unstateless";
-import {LoginFormComponent} from "./LoginForm.component";
-import {ILoginFormInputProps, LoginFormProps, ILoginFormProps} from "./LoginForm.d";
-import { useState } from "react";
+import { useSetting } from "@common/lib/setting/services";
 import { services } from "@core/lib/api";
+import { flash } from "@core/lib/flash";
+import { overridable } from "@core/lib/overridable";
 import { useModal } from "@core/lib/useModal";
 import { useLoginForm } from "@uac/lib/useLoginForm";
 import dayjs from "dayjs";
+import { useState } from "react";
 import { all } from "ts-functional";
-import { flash } from "@core/lib/flash";
-import { useSetting } from "@common/lib/setting/services";
+import { createInjector, inject, mergeProps } from "unstateless";
+import { LoginFormComponent } from "./LoginForm.component";
+import { ILoginFormInputProps, ILoginFormProps, LoginFormProps } from "./LoginForm.d";
 
 const injectLoginFormProps = createInjector(({}:ILoginFormInputProps):ILoginFormProps => {
     const appName = useSetting("siteName");
@@ -53,4 +54,4 @@ const connect = inject<ILoginFormInputProps, LoginFormProps>(mergeProps(
     injectLoginFormProps,
 ));
 
-export const LoginForm = connect(LoginFormComponent);
+export const LoginForm = overridable<ILoginFormInputProps>(connect(LoginFormComponent));

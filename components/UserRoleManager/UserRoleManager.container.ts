@@ -1,4 +1,5 @@
 import { services } from "@core/lib/api";
+import { overridable } from "@core/lib/overridable";
 import { useLoaderAsync } from "@core/lib/useLoader";
 import { IRole } from "@uac-shared/role/types";
 import { useEffect, useState } from "react";
@@ -46,4 +47,4 @@ const connect = inject<IUserRoleManagerInputProps, UserRoleManagerProps>(mergePr
     injectUserRoleManagerProps,
 ));
 
-export const UserRoleManager = connect(UserRoleManagerComponent);
+export const UserRoleManager = overridable<IUserRoleManagerInputProps>(connect(UserRoleManagerComponent));

@@ -2,7 +2,9 @@ import { DeleteBtn } from "@core/components/DeleteBtn";
 import { Editable } from "@core/components/Editable";
 import { services } from "@core/lib/api";
 import { flash } from "@core/lib/flash";
+import { overridable } from "@core/lib/overridable";
 import { useLoader } from "@core/lib/useLoader";
+import { useTableFilters } from "@core/lib/useTableFilters";
 import { appendTo, clear } from "@core/lib/util";
 import { IRole } from "@uac-shared/role/types";
 import { ColumnType } from "antd/es/table";
@@ -12,7 +14,6 @@ import { createInjector, inject, mergeProps } from "unstateless";
 import { hasPermission } from "../HasPermission";
 import { RoleManagerComponent } from "./RoleManager.component";
 import { IRoleManagerInputProps, IRoleManagerProps, RoleManagerProps } from "./RoleManager.d";
-import { useTableFilters } from "@core/lib/useTableFilters";
 
 const CanUpdate = hasPermission("role.update");
 const CanDelete = hasPermission("role.delete");
@@ -104,4 +105,4 @@ const connect = inject<IRoleManagerInputProps, RoleManagerProps>(mergeProps(
     injectRoleManagerProps,
 ));
 
-export const RoleManager = connect(RoleManagerComponent);
+export const RoleManager = overridable<IRoleManagerInputProps>(connect(RoleManagerComponent));

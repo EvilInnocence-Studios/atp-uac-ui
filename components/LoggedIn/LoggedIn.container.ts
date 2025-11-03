@@ -1,5 +1,6 @@
-import { createInjector, inject, mergeProps } from "unstateless";
+import { overridable } from "@core/lib/overridable";
 import { useLoggedInUser } from "@uac/lib/login/services";
+import { createInjector, inject, mergeProps } from "unstateless";
 import { LoggedInComponent } from "./LoggedIn.component";
 import { ILoggedInInputProps, ILoggedInProps, LoggedInProps } from "./LoggedIn.d";
 
@@ -16,4 +17,4 @@ const connect = inject<ILoggedInInputProps, LoggedInProps>(mergeProps(
     injectLoggedInProps,
 ));
 
-export const LoggedIn = connect(LoggedInComponent);
+export const LoggedIn = overridable<ILoggedInInputProps>(connect(LoggedInComponent));

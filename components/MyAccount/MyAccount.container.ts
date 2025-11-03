@@ -1,3 +1,4 @@
+import { overridable } from "@core/lib/overridable";
 import { useNavigate } from "react-router";
 import { pipe, prepend } from "ts-functional";
 import { createInjector, inject, mergeProps } from "unstateless";
@@ -16,4 +17,4 @@ const connect = inject<IMyAccountInputProps, MyAccountProps>(mergeProps(
     injectMyAccountProps,
 ));
 
-export const MyAccount = connect(MyAccountComponent);
+export const MyAccount = overridable<IMyAccountInputProps>(connect(MyAccountComponent));

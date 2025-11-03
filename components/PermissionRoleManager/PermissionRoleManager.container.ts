@@ -1,11 +1,12 @@
-import { createInjector, inject, mergeProps } from "unstateless";
-import {PermissionRoleManagerComponent} from "./PermissionRoleManager.component";
-import {IPermissionRoleManagerInputProps, PermissionRoleManagerProps, IPermissionRoleManagerProps} from "./PermissionRoleManager.d";
+import { services } from "@core/lib/api";
+import { flash } from "@core/lib/flash";
+import { overridable } from "@core/lib/overridable";
+import { useLoader } from "@core/lib/useLoader";
 import { IRole } from "@uac-shared/role/types";
 import { useEffect, useState } from "react";
-import { services } from "@core/lib/api";
-import { useLoader } from "@core/lib/useLoader";
-import { flash } from "@core/lib/flash";
+import { createInjector, inject, mergeProps } from "unstateless";
+import { PermissionRoleManagerComponent } from "./PermissionRoleManager.component";
+import { IPermissionRoleManagerInputProps, IPermissionRoleManagerProps, PermissionRoleManagerProps } from "./PermissionRoleManager.d";
 
 const injectPermissionRoleManagerProps = createInjector(({permission}:IPermissionRoleManagerInputProps):IPermissionRoleManagerProps => {
     const [roles, setRoles] = useState<IRole[]>([]);
@@ -56,4 +57,4 @@ const connect = inject<IPermissionRoleManagerInputProps, PermissionRoleManagerPr
     injectPermissionRoleManagerProps,
 ));
 
-export const PermissionRoleManager = connect(PermissionRoleManagerComponent);
+export const PermissionRoleManager = overridable<IPermissionRoleManagerInputProps>(connect(PermissionRoleManagerComponent));

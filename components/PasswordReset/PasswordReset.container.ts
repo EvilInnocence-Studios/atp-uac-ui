@@ -1,10 +1,11 @@
-import { createInjector, inject, mergeProps } from "unstateless";
-import {PasswordResetComponent} from "./PasswordReset.component";
-import {IPasswordResetInputProps, PasswordResetProps, IPasswordResetProps} from "./PasswordReset.d";
-import { useNavigate, useSearchParams } from "react-router";
-import { useState } from "react";
 import { services } from "@core/lib/api";
 import { flash } from "@core/lib/flash";
+import { overridable } from "@core/lib/overridable";
+import { useState } from "react";
+import { useNavigate, useSearchParams } from "react-router";
+import { createInjector, inject, mergeProps } from "unstateless";
+import { PasswordResetComponent } from "./PasswordReset.component";
+import { IPasswordResetInputProps, IPasswordResetProps, PasswordResetProps } from "./PasswordReset.d";
 
 const injectPasswordResetProps = createInjector(({userId, onUpdate = () => {}, successMsg, failMsg}:IPasswordResetInputProps):IPasswordResetProps => {
     const [search] = useSearchParams();
@@ -41,4 +42,4 @@ const connect = inject<IPasswordResetInputProps, PasswordResetProps>(mergeProps(
     injectPasswordResetProps,
 ));
 
-export const PasswordReset = connect(PasswordResetComponent);
+export const PasswordReset = overridable<IPasswordResetInputProps>(connect(PasswordResetComponent));

@@ -1,4 +1,5 @@
 import { services } from "@core/lib/api";
+import { overridable } from "@core/lib/overridable";
 import { faSignOut, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useLoggedInUser } from "@uac/lib/login/services";
@@ -48,4 +49,4 @@ const connect = inject<IAccountMenuInputProps, AccountMenuProps>(mergeProps(
     injectAccountMenuProps,
 ));
 
-export const AccountMenu = connect(AccountMenuComponent);
+export const AccountMenu = overridable<IAccountMenuInputProps>(connect(AccountMenuComponent));

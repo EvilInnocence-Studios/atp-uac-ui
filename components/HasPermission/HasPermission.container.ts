@@ -1,3 +1,4 @@
+import { overridable } from "@core/lib/overridable";
 import { usePermissions } from "@uac/lib/permission/usePermissions";
 import { createInjector, inject, mergeProps } from "unstateless";
 import { HasPermissionComponent } from "./HasPermission.component";
@@ -15,4 +16,4 @@ const connect = inject<IHasPermissionInputProps, HasPermissionProps>(mergeProps(
     injectHasPermissionProps,
 ));
 
-export const HasPermission = connect(HasPermissionComponent);
+export const HasPermission = overridable<IHasPermissionInputProps>(connect(HasPermissionComponent));

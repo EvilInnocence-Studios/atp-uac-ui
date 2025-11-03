@@ -2,6 +2,7 @@ import { DeleteBtn } from "@core/components/DeleteBtn";
 import { Editable } from "@core/components/Editable";
 import { services } from "@core/lib/api";
 import { flash } from "@core/lib/flash";
+import { overridable } from "@core/lib/overridable";
 import { useLoader } from "@core/lib/useLoader";
 import { useTableFilters } from "@core/lib/useTableFilters";
 import { appendTo, clear } from "@core/lib/util";
@@ -145,4 +146,4 @@ const connect = inject<IUserManagerInputProps, UserManagerProps>(mergeProps(
     injectUserManagerProps,
 ));
 
-export const UserManager = connect(UserManagerComponent);
+export const UserManager = overridable<IUserManagerInputProps>(connect(UserManagerComponent));

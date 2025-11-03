@@ -2,7 +2,9 @@ import { DeleteBtn } from "@core/components/DeleteBtn";
 import { Editable } from "@core/components/Editable";
 import { services } from "@core/lib/api";
 import { flash } from "@core/lib/flash";
+import { overridable } from "@core/lib/overridable";
 import { useLoader } from "@core/lib/useLoader";
+import { useTableFilters } from "@core/lib/useTableFilters";
 import { appendTo, clear } from "@core/lib/util";
 import { IPermission } from "@uac-shared/permissions/types";
 import { ColumnType } from "antd/es/table";
@@ -12,7 +14,6 @@ import { createInjector, inject, mergeProps } from "unstateless";
 import { hasPermission } from "../HasPermission";
 import { PermissionManagerComponent } from "./PermissionManager.component";
 import { IPermissionManagerInputProps, IPermissionManagerProps, PermissionManagerProps } from "./PermissionManager.d";
-import { useTableFilters } from "@core/lib/useTableFilters";
 
 const CanUpdate = hasPermission("permission.update");
 const CanDelete = hasPermission("permission.delete");
@@ -104,4 +105,4 @@ const connect = inject<IPermissionManagerInputProps, PermissionManagerProps>(mer
     injectPermissionManagerProps,
 ));
 
-export const PermissionManager = connect(PermissionManagerComponent);
+export const PermissionManager = overridable<IPermissionManagerInputProps>(connect(PermissionManagerComponent));
