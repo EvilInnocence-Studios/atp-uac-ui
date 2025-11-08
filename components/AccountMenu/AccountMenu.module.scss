@@ -1,7 +1,7 @@
 @use "@styles/globals.module.scss";
 
 .userName {
-    @media (max-width: 1160px) {
+    @media (max-width: 768px) {
         display: none;
     }
 }
@@ -13,7 +13,6 @@
 }
 
 .accountMenuButton {
-    margin-top: -16px;
     background-color: transparent;
     border: none !important;
 }

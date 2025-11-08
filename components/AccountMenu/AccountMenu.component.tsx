@@ -6,6 +6,6 @@ import { AccountMenuProps } from "./AccountMenu.d";
 import styles from './AccountMenu.module.scss';
 
 export const AccountMenuComponent = ({user, modal, menu, onMenuClick}:AccountMenuProps) => <>
-    {!isLoggedIn(user) && <span onClick={modal.open}><FontAwesomeIcon icon={faSignIn}/> Login</span>}
     {isLoggedIn(user) && <Menu className={styles.accountMenuButton} items={menu} onClick={onMenuClick}/>}
+    {!isLoggedIn(user) && <span onClick={modal.open}><FontAwesomeIcon icon={faSignIn}/> Login</span>}
 </>;
