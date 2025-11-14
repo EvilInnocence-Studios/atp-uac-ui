@@ -13,6 +13,7 @@ import { ILoginFormInputProps, ILoginFormProps, LoginFormProps } from "./LoginFo
 
 const injectLoginFormProps = createInjector(({}:ILoginFormInputProps):ILoginFormProps => {
     const appName = useSetting("siteName");
+    const logoUrl = useSetting("siteLogoUrl");
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
@@ -41,7 +42,7 @@ const injectLoginFormProps = createInjector(({}:ILoginFormInputProps):ILoginForm
     }
 
     return {
-        appName,
+        appName, logoUrl,
         userName, setUserName,
         password, setPassword,
         email, setEmail,

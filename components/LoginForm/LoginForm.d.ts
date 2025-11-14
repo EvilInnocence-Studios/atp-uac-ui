@@ -5,6 +5,7 @@ export declare interface ILoginFormProps {
     userName: string;
     password: string;
     email: string;
+    logoUrl: string;
     setUserName: (userName: string) => void;
     setPassword: (password: string) => void;
     setEmail: (email: string) => void;

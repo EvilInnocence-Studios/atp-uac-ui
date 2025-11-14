@@ -7,7 +7,7 @@ import { LoginFormProps } from "./LoginForm.d";
 import styles from './LoginForm.module.scss';
 
 export const LoginFormComponent = ({
-    appName,
+    appName, logoUrl,
     userName, setUserName,
     password, setPassword,
     email, setEmail,
@@ -17,7 +17,7 @@ export const LoginFormComponent = ({
 }:LoginFormProps) =>
     <div className={clsx([styles.loginForm, inline && styles.inline])}>
         {!inline && <div className={styles.header}>
-            <img src="/logo.png"/>
+            <img src={logoUrl}/>
             {appName} Login
             <FontAwesomeIcon icon={faClose} onClick={modal.close} />
         </div>}
