@@ -54,5 +54,6 @@ const injectLoginFormProps = createInjector(({}:ILoginFormInputProps):ILoginForm
 const connect = inject<ILoginFormInputProps, LoginFormProps>(mergeProps(
     injectLoginFormProps,
 ));
+export const connectLoginForm = connect;
 
 export const LoginForm = overridable<ILoginFormInputProps>(connect(LoginFormComponent));

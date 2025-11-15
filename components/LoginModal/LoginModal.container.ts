@@ -13,5 +13,6 @@ const injectLoginModalProps = createInjector(({}:ILoginModalInputProps):ILoginMo
 const connect = inject<ILoginModalInputProps, LoginModalProps>(mergeProps(
     injectLoginModalProps,
 ));
+export const connectLoginModal = connect;
 
 export const LoginModal = overridable<ILoginModalInputProps>(connect(LoginModalComponent));

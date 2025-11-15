@@ -46,5 +46,6 @@ const injectUserRoleManagerProps = createInjector(({user}:IUserRoleManagerInputP
 const connect = inject<IUserRoleManagerInputProps, UserRoleManagerProps>(mergeProps(
     injectUserRoleManagerProps,
 ));
+export const connectUserRoleManager = connect;
 
 export const UserRoleManager = overridable<IUserRoleManagerInputProps>(connect(UserRoleManagerComponent));

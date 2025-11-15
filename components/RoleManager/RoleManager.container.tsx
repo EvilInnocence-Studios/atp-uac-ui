@@ -104,5 +104,6 @@ const injectRoleManagerProps = createInjector(({}:IRoleManagerInputProps):IRoleM
 const connect = inject<IRoleManagerInputProps, RoleManagerProps>(mergeProps(
     injectRoleManagerProps,
 ));
+export const connectRoleManager = connect;
 
 export const RoleManager = overridable<IRoleManagerInputProps>(connect(RoleManagerComponent));

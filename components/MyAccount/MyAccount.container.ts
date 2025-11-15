@@ -16,5 +16,6 @@ const injectMyAccountProps = createInjector(({}:IMyAccountInputProps):IMyAccount
 const connect = inject<IMyAccountInputProps, MyAccountProps>(mergeProps(
     injectMyAccountProps,
 ));
+export const connectMyAccount = connect;
 
 export const MyAccount = overridable<IMyAccountInputProps>(connect(MyAccountComponent));

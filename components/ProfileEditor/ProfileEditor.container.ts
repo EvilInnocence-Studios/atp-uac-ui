@@ -46,5 +46,6 @@ const injectProfileEditorProps = createInjector(({userId}:IProfileEditorInputPro
 const connect = inject<IProfileEditorInputProps, ProfileEditorProps>(mergeProps(
     injectProfileEditorProps,
 ));
+export const connectProfileEditor = connect;
 
 export const ProfileEditor = overridable<IProfileEditorInputProps>(connect(ProfileEditorComponent));

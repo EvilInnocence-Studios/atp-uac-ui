@@ -16,5 +16,6 @@ const injectLoggedInProps = createInjector(({yes, no}:ILoggedInInputProps):ILogg
 const connect = inject<ILoggedInInputProps, LoggedInProps>(mergeProps(
     injectLoggedInProps,
 ));
+export const connectLoggedIn = connect;
 
 export const LoggedIn = overridable<ILoggedInInputProps>(connect(LoggedInComponent));

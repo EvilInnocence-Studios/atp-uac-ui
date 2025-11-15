@@ -48,5 +48,6 @@ const injectAccountMenuProps = createInjector(({}:IAccountMenuInputProps):IAccou
 const connect = inject<IAccountMenuInputProps, AccountMenuProps>(mergeProps(
     injectAccountMenuProps,
 ));
+export const connectAccountMenu = connect;
 
 export const AccountMenu = overridable<IAccountMenuInputProps>(connect(AccountMenuComponent));

@@ -104,5 +104,6 @@ const injectPermissionManagerProps = createInjector(({}:IPermissionManagerInputP
 const connect = inject<IPermissionManagerInputProps, PermissionManagerProps>(mergeProps(
     injectPermissionManagerProps,
 ));
+export const connectPermissionManager = connect;
 
 export const PermissionManager = overridable<IPermissionManagerInputProps>(connect(PermissionManagerComponent));

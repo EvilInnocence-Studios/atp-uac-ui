@@ -81,5 +81,6 @@ const injectRolePermissionManagerProps = createInjector(({role}:IRolePermissionM
 const connect = inject<IRolePermissionManagerInputProps, RolePermissionManagerProps>(mergeProps(
     injectRolePermissionManagerProps,
 ));
+export const connectRolePermissionManager = connect;
 
 export const RolePermissionManager = overridable<IRolePermissionManagerInputProps>(connect(RolePermissionManagerComponent));

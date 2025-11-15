@@ -145,5 +145,6 @@ const injectUserManagerProps = createInjector(({}:IUserManagerInputProps):IUserM
 const connect = inject<IUserManagerInputProps, UserManagerProps>(mergeProps(
     injectUserManagerProps,
 ));
+export const connectUserManager = connect;
 
 export const UserManager = overridable<IUserManagerInputProps>(connect(UserManagerComponent));

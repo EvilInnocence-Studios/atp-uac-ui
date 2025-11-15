@@ -41,5 +41,6 @@ const injectPasswordResetProps = createInjector(({userId, onUpdate = () => {}, s
 const connect = inject<IPasswordResetInputProps, PasswordResetProps>(mergeProps(
     injectPasswordResetProps,
 ));
+export const connectPasswordReset = connect;
 
 export const PasswordReset = overridable<IPasswordResetInputProps>(connect(PasswordResetComponent));

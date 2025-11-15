@@ -15,5 +15,6 @@ const injectHasPermissionProps = createInjector(({permissions, yes, no}:IHasPerm
 const connect = inject<IHasPermissionInputProps, HasPermissionProps>(mergeProps(
     injectHasPermissionProps,
 ));
+export const connectHasPermission = connect;
 
 export const HasPermission = overridable<IHasPermissionInputProps>(connect(HasPermissionComponent));
