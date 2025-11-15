@@ -4,8 +4,9 @@ import { LoggedIn } from "@uac/components/LoggedIn";
 import { uacPlugins } from "@uac/lib/plugin/slots";
 import { MyAccountProps } from "./MyAccount.d";
 import styles from './MyAccount.module.scss';
+import { overridable } from "@core/lib/overridable";
 
-export const MyAccountComponent = ({tab, userId, changeTab, id}:MyAccountProps) => <>
+export const MyAccountComponent = overridable(({tab, userId, changeTab, id}:MyAccountProps) => <>
     <LoggedIn yes>
         <div className={styles.myAccount}>
             <h1><FontAwesomeIcon icon={faUser} /> My Account</h1>
@@ -23,4 +24,4 @@ export const MyAccountComponent = ({tab, userId, changeTab, id}:MyAccountProps) 
             <p>Please log in to view your account details.</p>
         </div>
     </LoggedIn>
-</>;
+</>);

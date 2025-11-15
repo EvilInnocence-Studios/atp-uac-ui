@@ -5,8 +5,9 @@ import { Button, Col, Input, Row } from "antd";
 import clsx from "clsx";
 import { LoginFormProps } from "./LoginForm.d";
 import styles from './LoginForm.module.scss';
+import { overridable } from "@core/lib/overridable";
 
-export const LoginFormComponent = ({
+export const LoginFormComponent = overridable(({
     appName, logoUrl,
     userName, setUserName,
     password, setPassword,
@@ -93,4 +94,5 @@ export const LoginFormComponent = ({
                 </Col>}
             </Row>
         </div>
-    </div>;
+    </div>
+);

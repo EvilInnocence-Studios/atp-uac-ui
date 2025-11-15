@@ -8,11 +8,12 @@ import { hasPermission } from "../HasPermission";
 import { RoleManagerProps } from "./RoleManager.d";
 import styles from './RoleManager.module.scss';
 import { RolePermissionManager } from "../RolePermissionManager";
+import { overridable } from "@core/lib/overridable";
 
 const CanView = hasPermission("role.view");
 const CanCreate = hasPermission("role.create");
 
-export const RoleManagerComponent = ({roles, isLoading, name, description, setName, setDescription, create, columns}:RoleManagerProps) =>
+export const RoleManagerComponent = overridable(({roles, isLoading, name, description, setName, setDescription, create, columns}:RoleManagerProps) =>
     <div className={styles.permissionManager}>
         <h1><FontAwesomeIcon icon={faUsers} /> Roles</h1>
 
@@ -46,4 +47,5 @@ export const RoleManagerComponent = ({roles, isLoading, name, description, setNa
                 </Spin>
             </Col>
         </Row>
-    </div>;
+    </div>
+);

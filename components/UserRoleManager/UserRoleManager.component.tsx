@@ -2,8 +2,9 @@ import { Spin, Tag } from "antd";
 import {UserRoleManagerProps} from "./UserRoleManager.d";
 import styles from './UserRoleManager.module.scss';
 import { prop } from "ts-functional";
+import { overridable } from "@core/lib/overridable";
 
-export const UserRoleManagerComponent = ({user, roles, allRoles, add, remove, isLoading}:UserRoleManagerProps) =>
+export const UserRoleManagerComponent = overridable(({user, roles, allRoles, add, remove, isLoading}:UserRoleManagerProps) =>
     <Spin spinning={isLoading}>
         <b>Roles for {user.userName}</b><br/>
         {allRoles.map(role => <>
@@ -16,4 +17,5 @@ export const UserRoleManagerComponent = ({user, roles, allRoles, add, remove, is
                 {role.name}
             </Tag>
         </>)}
-    </Spin>;
+    </Spin>
+);

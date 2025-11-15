@@ -9,11 +9,12 @@ import { hasPermission } from "../HasPermission";
 import { UserRoleManager } from "../UserRoleManager";
 import { UserManagerProps } from "./UserManager.d";
 import styles from './UserManager.module.scss';
+import { overridable } from "@core/lib/overridable";
 
 const CanView = hasPermission("user.view");
 const CanCreate = hasPermission("user.create");
 
-export const UserManagerComponent = ({
+export const UserManagerComponent = overridable(({
     users, isLoading, userName, email, password,
     setUserName, setEmail, setPassword, create,
     columns,
@@ -55,5 +56,6 @@ export const UserManagerComponent = ({
                 </Spin>
             </Col>
         </Row>
-    </div>;
+    </div>
+);
 

@@ -6,6 +6,7 @@ import { RolePermissionManagerProps } from "./RolePermissionManager.d";
 import styles from './RolePermissionManager.module.scss';
 import { hasPermission } from "../HasPermission";
 import { IPermission } from "@uac-shared/permissions/types";
+import { overridable } from "@core/lib/overridable";
 
 const CanEdit = hasPermission("role.update");
 
@@ -17,7 +18,7 @@ const permissionSort = (a:IPermission, b:IPermission) => {
     return bIndex - aIndex;
 }
 
-export const RolePermissionManagerComponent = ({role, permissions, groupedPermissions, add, addAll, remove, removeAll, isLoading}:RolePermissionManagerProps) =>
+export const RolePermissionManagerComponent = overridable(({role, permissions, groupedPermissions, add, addAll, remove, removeAll, isLoading}:RolePermissionManagerProps) =>
     <Spin spinning={isLoading}>
         <CanEdit yes>
             <b>Permissions for {role.name}</b>
@@ -57,4 +58,5 @@ export const RolePermissionManagerComponent = ({role, permissions, groupedPermis
         <CanEdit no>
             <Alert type="warning" message="You do not have permission to view role permissions" />
         </CanEdit>
-    </Spin>;
+    </Spin>
+);

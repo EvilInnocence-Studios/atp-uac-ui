@@ -4,8 +4,9 @@ import styles from './PasswordReset.module.scss';
 import { onInputChange } from "@core/lib/onInputChange";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRefresh } from "@fortawesome/free-solid-svg-icons";
+import { overridable } from "@core/lib/overridable";
 
-export const PasswordResetComponent = ({newPassword, setNewPassword, oldPassword, setOldPassword, update, requireOldPassword}:PasswordResetProps) =>
+export const PasswordResetComponent = overridable(({newPassword, setNewPassword, oldPassword, setOldPassword, update, requireOldPassword}:PasswordResetProps) =>
     <div className={styles.passwordReset}>
         <h1>Reset Password</h1>
         
@@ -26,4 +27,5 @@ export const PasswordResetComponent = ({newPassword, setNewPassword, oldPassword
         <Button onClick={update} type="primary" size="large">
             <FontAwesomeIcon icon={faRefresh} /> Update Password
         </Button>
-    </div>;
+    </div>
+);

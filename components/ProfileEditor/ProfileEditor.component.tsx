@@ -7,10 +7,11 @@ import { PasswordReset } from "../PasswordReset";
 import { ProfileEditorProps } from "./ProfileEditor.d";
 import styles from './ProfileEditor.module.scss';
 import { hasPermission } from "../HasPermission";
+import { overridable } from "@core/lib/overridable";
 
 const IsAdmin = hasPermission('user.admin');
 
-export const ProfileEditorComponent = ({user, isLoading, update, title, passwordReset, openModal, refresh}:ProfileEditorProps) =>
+export const ProfileEditorComponent = overridable(({user, isLoading, update, title, passwordReset, openModal, refresh}:ProfileEditorProps) =>
     <Spin spinning={isLoading}>
         <Modal
             open={passwordReset.isset}
@@ -51,4 +52,5 @@ export const ProfileEditorComponent = ({user, isLoading, update, title, password
                 </Col>
             </Row>}
         </div>
-    </Spin>;
+    </Spin>
+);

@@ -8,11 +8,12 @@ import { prop, sort } from "ts-functional";
 import { IPermission } from "@uac-shared/permissions/types";
 import { PermissionRoleManager } from "../PermissionRoleManager";
 import { hasPermission } from "../HasPermission";
+import { overridable } from "@core/lib/overridable";
 
 const CanView = hasPermission("permission.view");
 const CanCreate = hasPermission("permission.create");
 
-export const PermissionManagerComponent = ({permissions, isLoading, name, description, setName, setDescription, create, columns}:PermissionManagerProps) =>
+export const PermissionManagerComponent = overridable(({permissions, isLoading, name, description, setName, setDescription, create, columns}:PermissionManagerProps) =>
     <div className={styles.permissionManager}>
         <h1><FontAwesomeIcon icon={faKey} /> Permissions</h1>
 
@@ -46,4 +47,5 @@ export const PermissionManagerComponent = ({permissions, isLoading, name, descri
                 </Spin>
             </Col>
         </Row>
-    </div>;
+    </div>
+);
