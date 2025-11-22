@@ -8,6 +8,7 @@ export declare interface ILoginModalProps {
 // What gets passed into the component from the parent as attributes
 export declare interface ILoginModalInputProps {
     modal: IModal;
+    classes?: any;
 }
 
 export type LoginModalProps = ILoginModalInputProps & ILoginModalProps;

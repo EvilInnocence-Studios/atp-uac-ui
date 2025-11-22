@@ -13,15 +13,15 @@ import { overridable } from "@core/lib/overridable";
 const CanView = hasPermission("role.view");
 const CanCreate = hasPermission("role.create");
 
-export const RoleManagerComponent = overridable(({roles, isLoading, name, description, setName, setDescription, create, columns}:RoleManagerProps) =>
-    <div className={styles.permissionManager}>
+export const RoleManagerComponent = overridable(({ roles, isLoading, name, description, setName, setDescription, create, columns, classes = styles }: RoleManagerProps) =>
+    <div className={classes.permissionManager}>
         <h1><FontAwesomeIcon icon={faUsers} /> Roles</h1>
 
         <Row gutter={8}>
             <Col xs={6}>
                 <CanCreate yes>
                     <Card size="small"
-                        className={styles.newRoleForm}
+                        className={classes.newRoleForm}
                         title={<>New Permission</>}
                         extra={<Button onClick={create} size="small" variant="link"><FontAwesomeIcon icon={faAdd} /> Create</Button>}
                     >
@@ -38,7 +38,7 @@ export const RoleManagerComponent = overridable(({roles, isLoading, name, descri
                             rowKey="id"
                             columns={columns}
                             size="small"
-                            expandable={{expandedRowRender: r => <RolePermissionManager role={r} />}}
+                            expandable={{ expandedRowRender: r => <RolePermissionManager role={r} /> }}
                         />
                     </CanView>
                     <CanView no>

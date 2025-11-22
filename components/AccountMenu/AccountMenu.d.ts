@@ -4,14 +4,14 @@ import { MenuItemType } from "antd/es/menu/interface";
 
 export declare interface IAccountMenuProps {
     user: ILoginResponse;
-    modal:IModal;
+    modal: IModal;
     menu: MenuItemType[];
-    onMenuClick: (args:{key:string}) => void;
+    onMenuClick: (args: { key: string }) => void;
 }
 
 // What gets passed into the component from the parent as attributes
 export declare interface IAccountMenuInputProps {
-
+    classes?: any;
 }
 
 export type AccountMenuProps = IAccountMenuInputProps & IAccountMenuProps;

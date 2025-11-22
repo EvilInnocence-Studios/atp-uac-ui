@@ -7,7 +7,7 @@ import styles from './AccountMenu.module.scss';
 import clsx from "clsx";
 import { overridable } from "@core/lib/overridable";
 
-export const AccountMenuComponent = overridable(({user, modal, menu, onMenuClick}:AccountMenuProps) => <>
-    {isLoggedIn(user) && <Menu className={styles.accountMenuButton} items={menu} onClick={onMenuClick}/>}
-    {!isLoggedIn(user) && <span className={clsx([styles.loginBtn, "loginBtn"])} onClick={modal.open}><FontAwesomeIcon icon={faSignIn}/> Login</span>}
+export const AccountMenuComponent = overridable(({ user, modal, menu, onMenuClick, classes = styles }: AccountMenuProps) => <>
+    {isLoggedIn(user) && <Menu className={classes.accountMenuButton} items={menu} onClick={onMenuClick} />}
+    {!isLoggedIn(user) && <span className={clsx([classes.loginBtn, "loginBtn"])} onClick={modal.open}><FontAwesomeIcon icon={faSignIn} /> Login</span>}
 </>);

@@ -14,12 +14,13 @@ export declare interface ILoginFormProps {
     forgotLoginForm: IModal;
     createAccountForm: IModal;
     createAccount: () => void;
-    modal:IModal;
+    modal: IModal;
 }
 
 // What gets passed into the component from the parent as attributes
 export declare interface ILoginFormInputProps {
     inline?: boolean;
+    classes?: any;
 }
 
 export type LoginFormProps = ILoginFormInputProps & ILoginFormProps;

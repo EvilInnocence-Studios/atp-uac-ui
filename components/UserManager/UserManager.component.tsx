@@ -17,16 +17,16 @@ const CanCreate = hasPermission("user.create");
 export const UserManagerComponent = overridable(({
     users, isLoading, userName, email, password,
     setUserName, setEmail, setPassword, create,
-    columns,
-}:UserManagerProps) =>
-    <div className={styles.permissionManager}>
+    columns, classes = styles
+}: UserManagerProps) =>
+    <div className={classes.permissionManager}>
         <h1><FontAwesomeIcon icon={faUser} /> Users</h1>
 
         <Row gutter={8}>
             <Col xs={6}>
                 <CanCreate yes>
                     <Card size="small"
-                        className={styles.newUserForm}
+                        className={classes.newUserForm}
                         title={<>New User</>}
                         extra={<Button onClick={create} size="small" variant="link"><FontAwesomeIcon icon={faAdd} /> Create</Button>}
                     >
@@ -44,10 +44,12 @@ export const UserManagerComponent = overridable(({
                             rowKey="id"
                             columns={columns}
                             size="small"
-                            expandable={{expandedRowRender: u => <>
-                                <UserRoleManager user={u} />
-                                {uacPlugins.userManager.tabs.render({userId: u.id})}
-                            </>}}
+                            expandable={{
+                                expandedRowRender: u => <>
+                                    <UserRoleManager user={u} />
+                                    {uacPlugins.userManager.tabs.render({ userId: u.id })}
+                                </>
+                            }}
                         />
                     </CanView>
                     <CanView no>

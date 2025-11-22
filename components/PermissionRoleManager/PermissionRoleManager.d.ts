@@ -12,6 +12,7 @@ export declare interface IPermissionRoleManagerProps {
 // What gets passed into the component from the parent as attributes
 export declare interface IPermissionRoleManagerInputProps {
     permission: IPermission;
+    classes?: any;
 }
 
 export type PermissionRoleManagerProps = IPermissionRoleManagerInputProps & IPermissionRoleManagerProps;

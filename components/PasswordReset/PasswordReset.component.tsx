@@ -1,24 +1,24 @@
 import { Button, Input } from "antd";
-import {PasswordResetProps} from "./PasswordReset.d";
+import { PasswordResetProps } from "./PasswordReset.d";
 import styles from './PasswordReset.module.scss';
 import { onInputChange } from "@core/lib/onInputChange";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRefresh } from "@fortawesome/free-solid-svg-icons";
 import { overridable } from "@core/lib/overridable";
 
-export const PasswordResetComponent = overridable(({newPassword, setNewPassword, oldPassword, setOldPassword, update, requireOldPassword}:PasswordResetProps) =>
-    <div className={styles.passwordReset}>
+export const PasswordResetComponent = overridable(({ newPassword, setNewPassword, oldPassword, setOldPassword, update, requireOldPassword, classes = styles }: PasswordResetProps) =>
+    <div className={classes.passwordReset}>
         <h1>Reset Password</h1>
-        
+
         {requireOldPassword && <Input.Password
-            addonBefore = "Old Password"
+            addonBefore="Old Password"
             value={oldPassword}
             onChange={onInputChange(setOldPassword)}
             placeholder="Old Password"
         />}
 
         <Input.Password
-            addonBefore = "New Password"
+            addonBefore="New Password"
             value={newPassword}
             onChange={onInputChange(setNewPassword)}
             onPressEnter={update}

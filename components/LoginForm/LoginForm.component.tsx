@@ -14,15 +14,15 @@ export const LoginFormComponent = overridable(({
     email, setEmail,
     login, forgotLogin, forgotLoginForm, createAccountForm,
     modal, createAccount,
-    inline,
-}:LoginFormProps) =>
-    <div className={clsx([styles.loginForm, inline && styles.inline])}>
-        {!inline && <div className={styles.header}>
-            <img src={logoUrl}/>
+    inline, classes = styles,
+}: LoginFormProps) =>
+    <div className={clsx([classes.loginForm, inline && classes.inline])}>
+        {!inline && <div className={classes.header}>
+            <img src={logoUrl} />
             {appName} Login
             <FontAwesomeIcon icon={faClose} onClick={modal.close} />
         </div>}
-        <div className={styles.form}>
+        <div className={classes.form}>
             {(forgotLoginForm.visible || createAccountForm.visible) &&
                 <Input
                     addonBefore={<FontAwesomeIcon icon={faEnvelope} />}
@@ -37,7 +37,7 @@ export const LoginFormComponent = overridable(({
                     value={userName}
                     placeholder="Username"
                     onChange={onInputChange(setUserName)}
-                />  
+                />
                 <Input.Password
                     addonBefore={<FontAwesomeIcon icon={faLock} />}
                     value={password}
@@ -47,28 +47,28 @@ export const LoginFormComponent = overridable(({
                 />
             </>}
             {!createAccountForm.visible && !forgotLoginForm.visible && <>
-                <Row className={styles.links}>
+                <Row className={classes.links}>
                     <Col xs={24}>
-                        <Button type="link" className={styles.forgotUsername} size="small" onClick={forgotLoginForm.open}>
+                        <Button type="link" className={classes.forgotUsername} size="small" onClick={forgotLoginForm.open}>
                             Forgot Username / password?
                         </Button>
                     </Col>
                 </Row>
             </>}
-            <Row className={styles.links}>
+            <Row className={classes.links}>
                 {forgotLoginForm.visible && <>
                     <Col xs={12}>
-                        <Button type="link" disabled={email === ""} onClick={forgotLogin} className={styles.forgotUsername}>
+                        <Button type="link" disabled={email === ""} onClick={forgotLogin} className={classes.forgotUsername}>
                             Send Reminder / reset link
                         </Button>
                     </Col>
                     <Col xs={12}>
-                        <Button type="link" onClick={forgotLoginForm.close} className={styles.forgotPassword}>
+                        <Button type="link" onClick={forgotLoginForm.close} className={classes.forgotPassword}>
                             Cancel
                         </Button>
                     </Col>
                 </>}
-                
+
                 {createAccountForm.visible && <Col xs={24}>
                     <Button type="link" onClick={createAccountForm.close}>
                         Cancel
@@ -76,12 +76,12 @@ export const LoginFormComponent = overridable(({
                 </Col>}
             </Row>
         </div>
-        <div className={styles.footer}>
+        <div className={classes.footer}>
             <Row>
                 {!forgotLoginForm.visible && <Col xs={createAccountForm.visible ? 24 : 12}>
                     <Button
                         type={createAccountForm.visible ? "primary" : "default"}
-                        className={styles.register}
+                        className={classes.register}
                         onClick={createAccountForm.visible ? createAccount : createAccountForm.open}
                     >
                         <FontAwesomeIcon icon={faUserPlus} /> Create Account

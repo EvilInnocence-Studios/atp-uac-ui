@@ -4,7 +4,7 @@ import { SafeUser } from "@uac-shared/user/types";
 export declare interface IProfileEditorProps {
     user: SafeUser | null;
     isLoading: boolean;
-    update: (field:keyof SafeUser) => (value:string) => void;
+    update: (field: keyof SafeUser) => (value: string) => void;
     passwordReset: IToggle;
     openModal: () => void;
     refresh: () => void;
@@ -14,6 +14,7 @@ export declare interface IProfileEditorProps {
 export declare interface IProfileEditorInputProps {
     title?: string;
     userId?: string;
+    classes?: any;
 }
 
 export type ProfileEditorProps = IProfileEditorInputProps & IProfileEditorProps;

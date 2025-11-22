@@ -11,13 +11,13 @@ export declare interface IUserManagerProps {
     setEmail: Setter<string>;
     setPassword: Setter<string>;
     create: () => void;
-    update: (id:string, field: string) => (value: any) => void;
+    update: (id: string, field: string) => (value: any) => void;
     columns: ColumnType<SafeUser>[];
 }
 
 // What gets passed into the component from the parent as attributes
 export declare interface IUserManagerInputProps {
-
+    classes?: any;
 }
 
 export type UserManagerProps = IUserManagerInputProps & IUserManagerProps;

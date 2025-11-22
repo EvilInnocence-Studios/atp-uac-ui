@@ -12,6 +12,7 @@ export declare interface IUserRoleManagerProps {
 // What gets passed into the component from the parent as attributes
 export declare interface IUserRoleManagerInputProps {
     user: SafeUser;
+    classes?: any;
 }
 
 export type UserRoleManagerProps = IUserRoleManagerInputProps & IUserRoleManagerProps;

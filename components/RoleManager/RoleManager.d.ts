@@ -8,14 +8,14 @@ export declare interface IRoleManagerProps {
     setName: Setter<string>;
     setDescription: Setter<string>;
     create: () => void;
-    update: (id:string, field: string) => (value: any) => void;
+    update: (id: string, field: string) => (value: any) => void;
     columns: ColumnType<IRole>[];
 
 }
 
 // What gets passed into the component from the parent as attributes
 export declare interface IRoleManagerInputProps {
-
+    classes?: any;
 }
 
 export type RoleManagerProps = IRoleManagerInputProps & IRoleManagerProps;

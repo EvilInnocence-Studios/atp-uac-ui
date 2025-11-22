@@ -15,6 +15,7 @@ export declare interface IPasswordResetInputProps {
     onUpdate?: () => void;
     successMsg?: string;
     failMsg?: string;
+    classes?: any;
 }
 
 export type PasswordResetProps = IPasswordResetInputProps & IPasswordResetProps;

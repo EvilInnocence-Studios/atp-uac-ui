@@ -11,19 +11,19 @@ import { overridable } from "@core/lib/overridable";
 const CanEdit = hasPermission("role.update");
 
 // Sort grouped permissions in this order: create, view, update, delete, and then all others
-const permissionSort = (a:IPermission, b:IPermission) => {
+const permissionSort = (a: IPermission, b: IPermission) => {
     const order = ["delete", "update", "view", "create"];
     const aIndex = order.indexOf(a.name.split(".")[1]);
     const bIndex = order.indexOf(b.name.split(".")[1]);
     return bIndex - aIndex;
 }
 
-export const RolePermissionManagerComponent = overridable(({role, permissions, groupedPermissions, add, addAll, remove, removeAll, isLoading}:RolePermissionManagerProps) =>
+export const RolePermissionManagerComponent = overridable(({ role, permissions, groupedPermissions, add, addAll, remove, removeAll, isLoading, classes = styles }: RolePermissionManagerProps) =>
     <Spin spinning={isLoading}>
         <CanEdit yes>
             <b>Permissions for {role.name}</b>
-            <div className={styles.rolePermissionManager}>
-                {Object.keys(groupedPermissions).map(group => <div className={styles.buttonGroup}>
+            <div className={classes.rolePermissionManager}>
+                {Object.keys(groupedPermissions).map(group => <div className={classes.buttonGroup}>
                     <Tag
                         onClick={
                             groupedPermissions[group].every(p => permissions.find(pp => pp.id === p.id))
@@ -32,8 +32,8 @@ export const RolePermissionManagerComponent = overridable(({role, permissions, g
                         }
                         color={
                             groupedPermissions[group].every(p => permissions.find(pp => pp.id === p.id)) ? "green" :
-                            groupedPermissions[group].some(p => permissions.find(pp => pp.id === p.id)) ? "orange" :
-                            "red"
+                                groupedPermissions[group].some(p => permissions.find(pp => pp.id === p.id)) ? "orange" :
+                                    "red"
                         }
                     >
                         <FontAwesomeIcon icon={faKey} /> {group}
@@ -43,7 +43,7 @@ export const RolePermissionManagerComponent = overridable(({role, permissions, g
                         color={permissions.find(pp => pp.id === p.id) ? "green" : "red"}
                     >
                         {switchOn<string | React.ReactElement>(p.name.split(".")[1], {
-                            view:   () => <FontAwesomeIcon icon={faEye} title="View" />,
+                            view: () => <FontAwesomeIcon icon={faEye} title="View" />,
                             update: () => <FontAwesomeIcon icon={faEdit} title="Update" />,
                             delete: () => <FontAwesomeIcon icon={faTrashCan} title="Delete" />,
                             create: () => <FontAwesomeIcon icon={faAdd} title="Add" />,

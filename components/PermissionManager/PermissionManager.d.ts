@@ -10,13 +10,13 @@ export declare interface IPermissionManagerProps {
     setName: Setter<string>;
     setDescription: Setter<string>;
     create: () => void;
-    update: (id:string, field: string) => (value: any) => void;
+    update: (id: string, field: string) => (value: any) => void;
     columns: ColumnType<IPermission>[];
 }
 
 // What gets passed into the component from the parent as attributes
 export declare interface IPermissionManagerInputProps {
-
+    classes?: any;
 }
 
 export type PermissionManagerProps = IPermissionManagerInputProps & IPermissionManagerProps;

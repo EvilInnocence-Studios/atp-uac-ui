@@ -6,9 +6,9 @@ import { MyAccountProps } from "./MyAccount.d";
 import styles from './MyAccount.module.scss';
 import { overridable } from "@core/lib/overridable";
 
-export const MyAccountComponent = overridable(({tab, userId, changeTab, id}:MyAccountProps) => <>
+export const MyAccountComponent = overridable(({ tab, userId, changeTab, id, classes = styles }: MyAccountProps) => <>
     <LoggedIn yes>
-        <div className={styles.myAccount}>
+        <div className={classes.myAccount}>
             <h1><FontAwesomeIcon icon={faUser} /> My Account</h1>
 
             {uacPlugins.myAccount.tabs.render({
@@ -19,7 +19,7 @@ export const MyAccountComponent = overridable(({tab, userId, changeTab, id}:MyAc
         </div>
     </LoggedIn>
     <LoggedIn no >
-        <div className={styles.myAccount}>
+        <div className={classes.myAccount}>
             <h1><FontAwesomeIcon icon={faUser} /> My Account</h1>
             <p>Please log in to view your account details.</p>
         </div>
