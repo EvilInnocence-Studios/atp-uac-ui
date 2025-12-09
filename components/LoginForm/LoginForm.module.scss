@@ -16,6 +16,8 @@ $loginformWidth: 378px;
         top: 16px;
     }
     &.inline {
+        display: block;
+        top: auto;
         margin: 0;
         position: relative;
         width: 100%;
