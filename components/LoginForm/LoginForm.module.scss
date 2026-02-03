@@ -6,7 +6,7 @@ $loginformWidth: 378px;
     position: fixed;
     border: solid 2px var(--borderColor);
     width: $loginformWidth;
-    max-width: min(590px, calc(100% - 64px));
+    max-width: calc(100% - 64px);
     left: 50%;
     top: 128px;
     transform: translateX(-50%);
@@ -45,7 +45,6 @@ $loginformWidth: 378px;
     }
     .form {
         padding: var(--paddingSmall) var(--padding) 0 var(--padding);
-        min-height: 140px;
         background-color: var(--bgColor);
         > :global(.ant-input-group-wrapper) {
             display: block;
