@@ -1,11 +1,11 @@
+import { overridable } from "@core/lib/overridable";
 import { isLoggedIn } from "@uac/lib/login/services";
 import { LoginForm } from "../LoginForm";
 import { LoginModalProps } from "./LoginModal.d";
 import styles from './LoginModal.module.scss';
-import { overridable } from "@core/lib/overridable";
 
-export const LoginModalComponent = overridable(({ modal, user, classes = styles }: LoginModalProps) =>
-    <div className={classes.loginFormContainer} style={{ display: modal.visible && !isLoggedIn(user) ? "block" : "none" }}>
+export const LoginModalComponent = overridable(({ loginModal, user, classes = styles }: LoginModalProps) => {
+    return <div className={classes.loginFormContainer} style={{ display: loginModal.visible && !isLoggedIn(user) ? "block" : "none" }}>
         <LoginForm />
-    </div>
-);
+    </div>;
+});

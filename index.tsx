@@ -1,7 +1,8 @@
-import { ComponentRegistry } from "@theming/lib/layout/componentRegistry";
 import { IModule } from "@core/lib/module";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { ComponentRegistry } from "@theming/lib/layout/componentRegistry";
 import { AccountMenu } from "./components/AccountMenu";
+import { LoginModal } from "./components/LoginModal";
 import { ProfileEditor } from "./components/ProfileEditor";
 import { uacMenus } from "./lib/menus";
 import { IMyAccountTabProps, uacPlugins } from "./lib/plugin/slots";
@@ -16,6 +17,7 @@ export const module: IModule = {
 }
 
 ComponentRegistry.register("AccountMenu", AccountMenu, { category: "Misc", displayName: "Account Menu" });
+ComponentRegistry.register(LoginModal);
 
 uacPlugins.myAccount.tabs.register({
     key: "profile",

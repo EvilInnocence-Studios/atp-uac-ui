@@ -3,11 +3,11 @@ import { ILoginResponse } from "@uac-shared/login/types";
 
 export declare interface ILoginModalProps {
     user: ILoginResponse;
+    loginModal: IModal;
 }
 
 // What gets passed into the component from the parent as attributes
 export declare interface ILoginModalInputProps {
-    modal: IModal;
     classes?: any;
 }
 
