@@ -10,6 +10,8 @@ export const uacRoutes = {
         {path: "/users", component: UserManager},
         {path: "/roles", component: RoleManager},
         {path: "/permissions", component: PermissionManager},
+        {path: "/my-account/:tab",     component: withRoute(MyAccount)    },
+        {path: "/my-account/:tab/:id", component: withRoute(MyAccount)    },
     ],
     public: [
         {path: "/reset-password", component: withRoute(PasswordReset)},
