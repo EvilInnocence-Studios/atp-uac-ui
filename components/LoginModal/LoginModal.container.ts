@@ -23,7 +23,8 @@ export const LoginModal = withLayoutMetadata(
     overridable<ILoginModalInputProps>(connect(LoginModalComponent)),
     {
         name: "LoginModal",
-        category: "UAC",
+        category: "User",
+        subCategory: "Auth",
         displayName: "Login Modal",
         icon,
         description: "",

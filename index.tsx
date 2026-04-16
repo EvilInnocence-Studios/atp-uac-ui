@@ -16,7 +16,7 @@ export const module: IModule = {
     settings: uacSettings,
 }
 
-ComponentRegistry.register("AccountMenu", AccountMenu, { category: "Misc", displayName: "Account Menu" });
+ComponentRegistry.register("AccountMenu", AccountMenu, { category: "User", subCategory: "Account", displayName: "Account Menu" });
 ComponentRegistry.register(LoginModal);
 
 uacPlugins.myAccount.tabs.register({
