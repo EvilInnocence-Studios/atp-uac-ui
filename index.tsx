@@ -8,6 +8,7 @@ import { uacMenus } from "./lib/menus";
 import { IMyAccountTabProps, uacPlugins } from "./lib/plugin/slots";
 import { uacRoutes } from "./lib/routes";
 import { uacSettings } from "./lib/settings";
+import { ProviderResistry } from "@core/lib/providerRegistry";
 
 export const module: IModule = {
     name: "uac",
@@ -17,7 +18,6 @@ export const module: IModule = {
 }
 
 ComponentRegistry.register("AccountMenu", AccountMenu, { category: "User", subCategory: "Account", displayName: "Account Menu" });
-ComponentRegistry.register(LoginModal);
 
 uacPlugins.myAccount.tabs.register({
     key: "profile",
@@ -26,3 +26,10 @@ uacPlugins.myAccount.tabs.register({
     priority: 1000,
     component: (props: IMyAccountTabProps) => <ProfileEditor {...props} title="My Profile" />,
 });
+
+ProviderResistry.register(({children}) => <>
+    <div className="rootLayout" style={{display: "contents"}}>
+        <LoginModal />
+    </div>
+    {children}
+</>);

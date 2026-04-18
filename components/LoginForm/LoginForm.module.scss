@@ -4,14 +4,14 @@ $loginformWidth: 378px;
 
 .loginForm {
     position: fixed;
-    border: solid 2px var(--borderColor);
+    border: solid 2px var(--loginFormBorder, var(--borderColor, var(--border, black)));
     width: $loginformWidth;
     max-width: calc(100% - 64px);
     left: 50%;
     top: 128px;
     transform: translateX(-50%);
-    border-radius: var(--borderRadiusLarge);
-    color:  var(--secondaryColor);
+    border-radius: var(--loginFormBorderRadius, var(--borderRadiusLarge, var(--borderRadius, 16px)));
+    color:  var(--loginFormColor, var(--secondaryColor, var(--secondary, black))) !important;
     @media (max-width: 600px) {
         top: 16px;
     }
@@ -24,14 +24,12 @@ $loginformWidth: 378px;
     }
     .header {
         text-align: center;
-        background-color: var(--bgLightColor);
-        border-top-left-radius: var(--borderRadiusLarge);
-        border-top-right-radius: var(--borderRadiusLarge);
+        background-color: var(--loginFormHeaderBgColor, var(--bgLightColor, var(--bgLight, white)));
         font-weight: bold;
         position: relative;
-        padding: var(--paddingSmall);
+        padding: var(--loginFormHeaderPadding, var(--paddingSmall, var(--padding, 8px)));
         img {
-            width: 24px;
+            height: 24px;
             position: absolute;
             top: 6px;
             left:16px;
@@ -44,17 +42,40 @@ $loginformWidth: 378px;
         }
     }
     .form {
-        padding: var(--paddingSmall) var(--padding) 0 var(--padding);
-        background-color: var(--bgColor);
+        padding:
+            var(--loginFormFormPadding, var(--paddingSmall, var(--padding, 8px)))
+            var(--loginFormFormPadding, var(--paddingSmall, var(--padding, 8px)))
+            0
+            var(--loginFormFormPadding, var(--paddingSmall, var(--padding, 8px)));
+        background-color: var(--loginFormFormBgColor, var(--bgColor, var(--bg, white)));
         > :global(.ant-input-group-wrapper) {
             display: block;
-            margin: 0 0 var(--paddingSmall) 0;
+            margin: 0 0 var(--loginFormFormPadding, var(--paddingSmall, var(--padding, 8px))) 0;
+            color: var(--loginFormColor, var(--primaryColor, var(--primary, black)));
+            border-color: var(--loginFormBorder, var(--borderColor, var(--border, black)));
+            :global(.ant-input-group-addon), :global(.ant-input-suffix) {
+                background-color: var(--loginFormFormBgColor, var(--bgColor, var(--bg, white)));
+                border-color: var(--loginFormBorder, var(--borderColor, var(--border, black)));
+                * {
+                    color: var(--loginFormColor, var(--primaryColor, var(--primary, black))) !important;
+                }
+            }
+            :global(.ant-input-wrapper), :global(.ant-input-affix-wrapper) {
+                background-color: var(--loginFormFormBgColor, var(--bgColor, var(--bg, white)));
+                border-color: var(--loginFormBorder, var(--borderColor, var(--border, black)));
+                color: var(--loginFormColor, var(--primaryColor, var(--primary, black)));
+                input {
+                    background-color: var(--loginFormFormBgColor, var(--bgColor, var(--bg, white)));
+                    border-color: var(--loginFormBorder, var(--borderColor, var(--border, black)));
+                    color: var(--loginFormColor, var(--primaryColor, var(--primary, black)));
+                }
+            }
         }
         .links {
             text-align: center;
             > div {
                 margin: 0;
-                padding: var(--padding) 0;
+                padding: var(--loginFormFormPadding, var(--paddingSmall, var(--padding, 8px))) 0;
                 button {
                     width: 100%;
                     margin: 0;
@@ -63,11 +84,9 @@ $loginformWidth: 378px;
         }
     }
     .footer {
-        background-color: var(--bgLightColor);
-        border-bottom-left-radius: var(--borderRadiusLarge);
-        border-bottom-right-radius: var(--borderRadiusLarge);
+        background-color: var(--loginFormFooterBgColor, var(--bgLightColor, var(--bgLight, white)));
         font-weight: bold;
         text-align: center;
-        padding: var(--paddingSmall);
+        padding: var(--loginFormFooterPadding, var(--paddingSmall, var(--padding, 8px)));
     }
 }
