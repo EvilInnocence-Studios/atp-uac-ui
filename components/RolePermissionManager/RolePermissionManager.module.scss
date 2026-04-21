@@ -3,22 +3,18 @@
 .rolePermissionManager {
     .buttonGroup {
         display: inline-block;
-        margin: var(--paddingSmall);
+        margin: 16px;
         > span {
             display: inline-block;
-            border-color: var(--borderColor);
             border-radius: 0;
             border-left: none;
             border-right: none;
             margin-left: 0;
             margin-right: 0;
             &:first-child{
-                border-left: solid 1px var(--borderColor);
-                border-right: solid 1px var(--borderColor);
                 border-radius: 3px 0 0 3px;
             }
             &:last-child{
-                border-right: solid 1px var(--borderColor);
                 border-radius: 0 3px 3px 0;
             }
         }

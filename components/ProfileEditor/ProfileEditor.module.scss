@@ -1,11 +1,11 @@
 @use "@styles/globals.module.scss";
 
 .profileEditor {
-    margin-right: var(--padding);
+    margin-right: 16px;
     position: relative;
     max-width: 768px;
     > div > div {
-        margin-bottom: var(--padding);
+        margin-bottom: 16px;
     }
 
     .refreshButton {
