@@ -35,6 +35,7 @@ const injectLoginFormProps = createInjector(({}:ILoginFormInputProps):ILoginForm
             userName, password, email,
             prefix: "", firstName: "", lastName: "",
             mustUpdatePassword: false,
+            hashAlgorithm: "bcrypt" as "bcrypt",
             suffix: "",
             subscriptionId: null,
             createdAt: dayjs().toISOString(),

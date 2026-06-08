@@ -54,6 +54,7 @@ const injectUserManagerProps = createInjector(({}:IUserManagerInputProps):IUserM
                 email,
                 password: 'password',
                 mustUpdatePassword: true,
+                hashAlgorithm: "bcrypt" as "bcrypt",
                 prefix: "",
                 firstName: "",
                 lastName: "",
