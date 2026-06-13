@@ -16,13 +16,13 @@ export const LoginFormComponent = overridable(({
     modal, createAccount,
     inline, classes = styles,
 }: LoginFormProps) =>
-    <div className={clsx([classes.loginForm, inline && classes.inline])}>
-        {!inline && <div className={classes.header}>
+    <div className={clsx([classes.loginForm, inline && classes.inline, "loginForm"])}>
+        {!inline && <div className={clsx(classes.header, "loginFormHeader")}>
             <img src={logoUrl} />
             {appName} Login
             <FontAwesomeIcon icon={faClose} onClick={modal.close} />
         </div>}
-        <div className={classes.form}>
+        <div className={clsx(classes.form, "loginFormForm")}>
             {(forgotLoginForm.visible || createAccountForm.visible) &&
                 <Input
                     addonBefore={<FontAwesomeIcon icon={faEnvelope} />}
@@ -47,23 +47,23 @@ export const LoginFormComponent = overridable(({
                 />
             </>}
             {!createAccountForm.visible && !forgotLoginForm.visible && <>
-                <Row className={classes.links}>
+                <Row className={clsx(classes.links, "loginFormLinks")}>
                     <Col xs={24}>
-                        <Button type="link" className={classes.forgotUsername} size="small" onClick={forgotLoginForm.open}>
+                        <Button type="link" className={clsx(classes.forgotUsername, "loginFormForgotPassword")} size="small" onClick={forgotLoginForm.open}>
                             Forgot Username / password?
                         </Button>
                     </Col>
                 </Row>
             </>}
-            <Row className={classes.links}>
+            <Row className={clsx(classes.links, "loginFormLinks")}>
                 {forgotLoginForm.visible && <>
                     <Col xs={12}>
-                        <Button type="link" disabled={email === ""} onClick={forgotLogin} className={classes.forgotUsername}>
+                        <Button type="link" disabled={email === ""} onClick={forgotLogin} className={clsx(classes.forgotUsername, "loginFormForgotPassword")}>
                             Send Reminder / reset link
                         </Button>
                     </Col>
                     <Col xs={12}>
-                        <Button type="link" onClick={forgotLoginForm.close} className={classes.forgotPassword}>
+                        <Button type="link" onClick={forgotLoginForm.close} className={clsx(classes.forgotPassword, "loginFormForgotPassword")}>
                             Cancel
                         </Button>
                     </Col>
@@ -76,7 +76,7 @@ export const LoginFormComponent = overridable(({
                 </Col>}
             </Row>
         </div>
-        <div className={classes.footer}>
+        <div className={clsx(classes.footer, "loginFormFooter")}>
             <Row>
                 {!forgotLoginForm.visible && <Col xs={createAccountForm.visible ? 24 : 12}>
                     <Button
