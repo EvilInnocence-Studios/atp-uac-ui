@@ -39,9 +39,6 @@ export const ProfileEditorComponent = overridable(({ user, isLoading, update, ti
                 {title || "Profile Editor"}
             </h1>
             {user && <Row gutter={16}>
-                <Col xs={24} md={8}><Label label="Username"><Editable value={user.userName} onChange={update('userName')} /></Label></Col>
-                <Col xs={24} md={8}><Label label="Email"><Editable value={user.email} onChange={update('email')} /></Label></Col>
-                <Col xs={24} md={8}><Button onClick={openModal}><FontAwesomeIcon icon={faRefresh} /> Update Password</Button></Col>
                 <Col xs={24} className={classes.nameEdit}>
                     <Label label="Name">
                         <Editable placeholder="Prefix" value={user.prefix} onChange={update("prefix")} />
@@ -50,6 +47,9 @@ export const ProfileEditorComponent = overridable(({ user, isLoading, update, ti
                         <Editable placeholder="Suffix" value={user.suffix} onChange={update('suffix')} />
                     </Label>
                 </Col>
+                <Col xs={24}><Label label="Username"><Editable value={user.userName} onChange={update('userName')} /></Label></Col>
+                <Col xs={24}><Label label="Email"><Editable value={user.email} onChange={update('email')} /></Label></Col>
+                <Col xs={24}><Button onClick={openModal}><FontAwesomeIcon icon={faRefresh} /> Update Password</Button></Col>
             </Row>}
         </div>
     </Spin>
