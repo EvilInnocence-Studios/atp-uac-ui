@@ -18,24 +18,23 @@ const emptyUser = {
     firstName: "",
     lastName: "",
     suffix: "",
-    subscriptionId: null,
     createdAt: "",
 };
-const emptyLoggedInUser = {user: emptyUser, loginToken: '', permissions: []};
+const emptyLoggedInUser = { user: emptyUser, loginToken: '', permissions: [] };
 
 export const useLoggedInUserRaw = useLocalStorage.object<ILoginResponse>('loggedInUser', emptyLoggedInUser);
-export const isLoggedIn = (user:ILoginResponse) => !!user.loginToken;
+export const isLoggedIn = (user: ILoginResponse) => !!user.loginToken;
 export const getLoginToken = () => useLoggedInUserRaw.getValue().loginToken;
 export const getCurrentUser = () => useLoggedInUserRaw.getValue().user;
 
 const loadDefaultPermissions = memoizePromise(() => services().permission.default());
 
-export const useLoggedInUser = ():[ILoginResponse, Setter<ILoginResponse>, () => void] => {
+export const useLoggedInUser = (): [ILoginResponse, Setter<ILoginResponse>, () => void] => {
     const [user, setUser] = useLoggedInUserRaw();
     const [defaultPermissions, setDefaultPermissions] = useSharedState<IPermission[]>('defaultPermissions', [])();
 
     useEffect(() => {
-        if(defaultPermissions.length === 0) {
+        if (defaultPermissions.length === 0) {
             loadDefaultPermissions().then(setDefaultPermissions);
         }
     }, []);
@@ -43,7 +42,7 @@ export const useLoggedInUser = ():[ILoginResponse, Setter<ILoginResponse>, () =>
     // If the user is not logged in, fetch the default permissions from the api
     useEffect(() => {
         if (!isLoggedIn(user)) {
-            setUser({...user, permissions: defaultPermissions});
+            setUser({ ...user, permissions: defaultPermissions });
         }
     }, [isLoggedIn(user)]);
 
@@ -56,21 +55,21 @@ export const useLoggedInUser = ():[ILoginResponse, Setter<ILoginResponse>, () =>
     return [user, setUser, refresh];
 }
 
-export const loginServices = ({get, post}:IMethods) => ({
-    login: (req:ILoginRequest) => post('login', req)
+export const loginServices = ({ get, post }: IMethods) => ({
+    login: (req: ILoginRequest) => post('login', req)
         .then(getResults<ILoginResponse>)
-        .then((res:ILoginResponse) => {
+        .then((res: ILoginResponse) => {
             useLoggedInUserRaw.setValue(res);
-            notification.success({message: 'Login Successful'});
+            notification.success({ message: 'Login Successful' });
         }).catch(() => {
-            notification.error({message: 'Login Failed'});
+            notification.error({ message: 'Login Failed' });
         }),
     logout: () => {
-        notification.success({message: "You have been logged out"});
+        notification.success({ message: "You have been logged out" });
         useLoggedInUserRaw.setValue(emptyLoggedInUser);
     },
     profile: () => get('profile')
         .then(getResults<ILoginResponse>),
-    forgotLogin: (email: string) => post('user/forgotLogin', {email})
-        .then(() => notification.success({message: 'Email Sent'})),
+    forgotLogin: (email: string) => post('user/forgotLogin', { email })
+        .then(() => notification.success({ message: 'Email Sent' })),
 });
