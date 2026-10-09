@@ -19,23 +19,23 @@ import { IUserManagerInputProps, IUserManagerProps, UserManagerProps } from "./U
 const CanUpdate = hasPermission("user.update");
 const CanDelete = hasPermission("user.delete");
 
-const injectUserManagerProps = createInjector(({}:IUserManagerInputProps):IUserManagerProps => {
+const injectUserManagerProps = createInjector(({ }: IUserManagerInputProps): IUserManagerProps => {
     const [users, setUsers] = useState<SafeUser[]>([]);
-    const loader =  useLoader();
+    const loader = useLoader();
 
     const user = services().user;
 
-    const update = (id:string, field:string) => (value:any) => {
+    const update = (id: string, field: string) => (value: any) => {
         const oldUsers = users;
-        setUsers(users.map(u => u.id === id ? {...u, [field]: value} : u));
+        setUsers(users.map(u => u.id === id ? { ...u, [field]: value } : u));
         loader.start();
-        user.update(id, {[field]: value})
+        user.update(id, { [field]: value })
             .then(flash.success("User updated"))
             .catch(all(() => setUsers(oldUsers), flash.error("Failed to update user")))
             .finally(loader.stop);
     }
 
-    const remove = (id:string) => () => {
+    const remove = (id: string) => () => {
         const oldUsers = users;
         setUsers(users.filter(u => u.id !== id));
         loader.start();
@@ -50,18 +50,17 @@ const injectUserManagerProps = createInjector(({}:IUserManagerInputProps):IUserM
     const create = () => {
         loader.start();
         user.create({
-                userName,
-                email,
-                password: 'password',
-                mustUpdatePassword: true,
-                hashAlgorithm: "bcrypt" as "bcrypt",
-                prefix: "",
-                firstName: "",
-                lastName: "",
-                suffix: "",
-                subscriptionId: null,
-                createdAt: dayjs().toISOString()
-            })
+            userName,
+            email,
+            password: 'password',
+            mustUpdatePassword: true,
+            hashAlgorithm: "bcrypt" as "bcrypt",
+            prefix: "",
+            firstName: "",
+            lastName: "",
+            suffix: "",
+            createdAt: dayjs().toISOString()
+        })
             .then(appendTo(users))
             .then(all(
                 refresh,
@@ -82,7 +81,7 @@ const injectUserManagerProps = createInjector(({}:IUserManagerInputProps):IUserM
     useEffect(refresh, []);
 
     const filters = useTableFilters(users);
-    const columns:ColumnType<IUser>[] = [{
+    const columns: ColumnType<IUser>[] = [{
         title: filters.filter("User Name", "userName"),
         key: "userName",
 
@@ -116,7 +115,7 @@ const injectUserManagerProps = createInjector(({}:IUserManagerInputProps):IUserM
                 {record.firstName}
             </CanUpdate>
         </>,
-    },{
+    }, {
         title: filters.filter("Last Name", "lastName"),
         key: "lastName",
         render: (record) => <>
@@ -127,7 +126,7 @@ const injectUserManagerProps = createInjector(({}:IUserManagerInputProps):IUserM
                 {record.lastName}
             </CanUpdate>
         </>,
-    },{
+    }, {
         title: filters.Clear,
         key: "actions",
         render: (record) => <CanDelete yes>

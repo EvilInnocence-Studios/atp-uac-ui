@@ -11,7 +11,7 @@ import { createInjector, inject, mergeProps } from "unstateless";
 import { LoginFormComponent } from "./LoginForm.component";
 import { ILoginFormInputProps, ILoginFormProps, LoginFormProps } from "./LoginForm.d";
 
-const injectLoginFormProps = createInjector(({}:ILoginFormInputProps):ILoginFormProps => {
+const injectLoginFormProps = createInjector(({ }: ILoginFormInputProps): ILoginFormProps => {
     const appName = useSetting("siteName");
     const logoUrl = useSetting("siteLogoUrl");
     const [userName, setUserName] = useState("");
@@ -22,7 +22,7 @@ const injectLoginFormProps = createInjector(({}:ILoginFormInputProps):ILoginForm
     const modal = useLoginForm();
 
     const login = () => {
-        services().login({userName, password});
+        services().login({ userName, password });
     }
 
     const forgotLogin = () => {
@@ -37,7 +37,6 @@ const injectLoginFormProps = createInjector(({}:ILoginFormInputProps):ILoginForm
             mustUpdatePassword: false,
             hashAlgorithm: "bcrypt" as "bcrypt",
             suffix: "",
-            subscriptionId: null,
             createdAt: dayjs().toISOString(),
         }).then(all(createAccountForm.close, modal.close, flash.success("Account created"), login));
     }
