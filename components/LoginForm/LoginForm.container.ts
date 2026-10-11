@@ -34,7 +34,7 @@ const injectLoginFormProps = createInjector(({ }: ILoginFormInputProps): ILoginF
         services().user.create({
             userName, password, email,
             prefix: "", firstName: "", lastName: "",
-            mustUpdatePassword: false,
+            mustUpdatePassword: true,
             hashAlgorithm: "bcrypt" as "bcrypt",
             suffix: "",
             createdAt: dayjs().toISOString(),

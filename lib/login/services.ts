@@ -12,7 +12,7 @@ const emptyUser = {
     userName: '',
     id: "0",
     email: "",
-    mustUpdatePassword: false,
+    mustUpdatePassword: true,
     hashAlgorithm: "bcrypt" as "bcrypt",
     prefix: "",
     firstName: "",
